@@ -3,7 +3,7 @@ from django.db import models
 class SensorData(models.Model):
     #check on this
     battery = models.DecimalField(max_digits=3, demical_places=2, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(null=True)
     data1 = models.IntegerField(null=True)
     data2 = models.IntegerField(null=True)
     data3 = models.IntegerField(null=True)
