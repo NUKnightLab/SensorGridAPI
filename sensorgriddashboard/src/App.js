@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import getJSON from './APIFunctions/getJSONData.js'
 
 class App extends Component {
+  componentWillMount() {
+    getJSON()
+    .then( (res) => {
+      console.log('suh')
+    })
+  }
   render() {
     return (
       <div className="App">
