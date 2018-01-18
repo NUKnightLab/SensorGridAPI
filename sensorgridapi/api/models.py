@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from django.db import models
 
 class SensorData(models.Model):
     #check on this
-    battery = models.DecimalField(max_digits=3, demical_places=2, null=True)
+    battery = models.DecimalField(max_digits=3, decimal_places=2, null=True)
     created_at = models.DateTimeField(null=True)
     data1 = models.IntegerField(null=True)
     data2 = models.IntegerField(null=True)
