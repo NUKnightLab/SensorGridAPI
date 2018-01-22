@@ -1,0 +1,14 @@
+domains: "{{ project_name }}.knightlab.com"
+static_bucket: "media.knightlab.com"
+gunicorn_reload: False
+
+ssl:
+  ssl_certificate: "/etc/nginx/ssl/knightlab/knightlab-bundle.crt"
+  ssl_certificate_key: "/etc/nginx/ssl/knightlab/knightlab-com.key"
+
+init_env_prd:
+  STATIC_URL: "//media.knightlab.com/{{ project_name }}/"
+
+# init_env is used to create the deployment-specific env.sh that is used by
+# Upstart and is sourced by virtualenvwrapper and django_manage.sh
+init_env: "{{ init_env_common|combine(init_env_prd) }}"
