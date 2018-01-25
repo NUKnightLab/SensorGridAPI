@@ -11,8 +11,8 @@ def requeststest_list(request, format=None):
     List all code snippets, or create a new snippet.
     """
     if request.method == 'GET':
-        requeststest = requeststest.objects.all()
-        serializer = requeststestSerializer(requeststest, many=True)
+        requeststest = Requeststest.objects.all()
+        serializer = RequeststestSerializer(requeststest, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
@@ -20,7 +20,7 @@ def requeststest_list(request, format=None):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errorss, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -30,7 +30,7 @@ def requeststest_detail(request, pk, format=None):
     """
     try:
         requeststest = Requeststest.objects.get(pk=pk)
-    except Snippet.DoesNotExist:
+    except Requeststest.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
