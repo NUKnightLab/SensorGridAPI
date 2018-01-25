@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import getJSON from './APIFunctions/getJSONData.js'
+import BarChart from './BarChart'
 //Currently this component is the whole application, it has a few boilerplate
 //things. When the component mounts it makes a call to the API and displays the first
 //battery datapoint
@@ -35,7 +36,10 @@ class App extends Component {
         <p className="App-intro">
           {/*This takes the batteryLife variable and displays it  */}
           {batteryLife}
-        </p>  
+        </p>
+        <div>
+      <BarChart data={[5,10,1,3]} size={[500,500]} />
+      </div>
       </div>
     );
   }
