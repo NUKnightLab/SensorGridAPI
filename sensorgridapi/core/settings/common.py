@@ -16,7 +16,7 @@ from os import environ as env
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-ALLOWED_HOSTS = env.get('APPLICATION_DOMAINS', '').split()
+ALLOWED_HOSTS = env.get('APPLICATION_DOMAINS', '').split() + ['127.0.0.1']
 
 
 # Application definition
@@ -29,7 +29,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'api'
+    'api',
+    'requeststest.apps.RequeststestConfig'
+    # 'sensordata.apps.SensorDataConfig'
 ]
 
 MIDDLEWARE = [
@@ -107,6 +109,6 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }

@@ -19,3 +19,6 @@ class SensorData(models.Model):
     record_id = models.CharField(max_length=100, blank=True, default='')
     timestamp = models.DateTimeField(auto_now_add=True)
     version = models.IntegerField(null=True)
+
+    class Meta:
+        ordering = ('id',)
