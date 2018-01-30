@@ -11,7 +11,7 @@ class SensorDataSerializer(serializers.ModelSerializer):
 # may need different serializers for post and getf
 # not going to post an id, for example
 
-#
+
 # class SensorDataSerializer(serializers.Serializer):
 #     id = serializers.IntegerField(read_only=True)
 #     battery = serializers.DecimalField(decimal_places=2, max_digits=3)
