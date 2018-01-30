@@ -1,4 +1,4 @@
-domains: "{{ project_name }}.knightlab.com"
+domains: "api.sensorgrid.knightlab.com"
 static_bucket: "media.knightlab.com"
 gunicorn_reload: False
 
