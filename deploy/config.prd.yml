@@ -1,4 +1,4 @@
-domains: "api.sensorgrid.knightlab.com"
+domains: "sensorgridapi.knightlab.com"
 static_bucket: "media.knightlab.com"
 gunicorn_reload: False
 
