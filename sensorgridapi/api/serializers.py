@@ -5,7 +5,7 @@ from api.models import SensorData
 class SensorDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = SensorData
-        fields = ('id', 'battery', 'created_at', 'data1', 'data2', 'data3'. 'message_id', 'network', 'node_id', 'ram', 'recieved_at', 'record_id', 'timestamp', 'version')
+        fields = ('id', 'battery', 'created_at', 'data1', 'data2', 'data3', 'message_id', 'network', 'node_id', 'ram', 'recieved_at', 'record_id', 'timestamp', 'version')
         exclude = []
 
 # may need different serializers for post and getf
