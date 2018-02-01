@@ -21,7 +21,17 @@
 .App-intro {
   font-size: large;
 }
+.dashboard {
+  display: flex;
+  flex-direction: row
+}
 
+.linegraph {
+  width: 700px
+}
+.bargraph {
+  width: 700px
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
