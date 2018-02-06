@@ -1,8 +1,10 @@
 from rest_framework import status
+from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from sensordata.models import SensorData
 from sensordata.serializers import SensorDataSerializer
+from sensordata.models import SensorData
 
 
 @api_view(['GET', 'POST'])
@@ -47,3 +49,17 @@ def sensordata_detail(request, pk, format=None):
     elif request.method == 'DELETE':
         sensordata.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class SensorDataList(generics.ListAPIView):
+    serializer_class = SensorDataSerializer
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `username` query parameter in the URL.
+        """
+        queryset = SensorData.objects.all()
+        battery = self.request.query_params.get('battery', None)
+        if battery is not None:
+            queryset = queryset.filter(sensordata__battery=battery)
+        return queryset

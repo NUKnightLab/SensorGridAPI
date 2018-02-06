@@ -22,4 +22,3 @@ class SensorData(models.Model):
 
     class Meta:
         ordering = ('id',)
-
