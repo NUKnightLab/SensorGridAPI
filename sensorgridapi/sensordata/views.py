@@ -1,12 +1,12 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from api.models import SensorData
-from api.serializers import SensorDataSerializer
+from sensordata.models import SensorData
+from sensordata.serializers import SensorDataSerializer
 
 
 @api_view(['GET', 'POST'])
-def api_list(request, format=None):
+def sensordata_list(request, format=None):
     """
     List all code snippets, or create a new snippet.
     """
@@ -24,7 +24,7 @@ def api_list(request, format=None):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def api_detail(request, pk, format=None):
+def sensordata_detail(request, pk, format=None):
     """
     Retrieve, update or delete a code snippet.
     """

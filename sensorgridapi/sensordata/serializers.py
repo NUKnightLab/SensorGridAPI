@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import SensorData
+from sensordata.models import SensorData
 
 
 class SensorDataSerializer(serializers.ModelSerializer):
