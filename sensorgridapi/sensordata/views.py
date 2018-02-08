@@ -6,7 +6,6 @@ from sensordata.models import SensorData
 from sensordata.serializers import SensorDataSerializer
 from sensordata.models import SensorData
 
-
 @api_view(['GET', 'POST'])
 def sensordata_list(request, format=None):
     """
@@ -58,8 +57,12 @@ class SensorDataList(generics.ListAPIView):
         Optionally restricts the returned purchases to a given user,
         by filtering against a `username` query parameter in the URL.
         """
-        queryset = SensorData.objects.all()
-        battery = self.request.query_params.get('battery', None)
-        if battery is not None:
-            queryset = queryset.filter(sensordata__battery=battery)
-        return queryset
+        # queryset = SensorData.objects.all()
+        # battery = self.request.query_params.get('battery', None)
+        # if battery is not None:
+        #     queryset = queryset.filter(sensordata__battery=battery)
+        # return queryset
+
+        battery = self.kwargs['battery']
+        # return SensorData.objects.filter(battery=3.72)
+        return None

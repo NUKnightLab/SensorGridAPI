@@ -18,6 +18,8 @@ from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 from django.contrib import admin
 from sensordata.models import SensorData
+from sensordata import views
+from sensordata.views import SensorDataList
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -59,7 +61,9 @@ router.register(r'data', SensorDataViewSet)
 # Create url extensions, and assign url frameworks to each extension
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include(router.urls)),
+    # url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^', include('sensordata.urls')),
+    # url(r'^', include('sensordata.urls')),
+    url(r'^sensordata/$', views.sensordata_list),
+    url('^sensordata/(?P<battery>.+)/$', SensorDataList.as_view()),
 ]

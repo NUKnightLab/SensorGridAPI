@@ -5,7 +5,8 @@ from sensordata.views import SensorDataList
 
 urlpatterns = [
     url(r'^sensordata/$', views.sensordata_list),
-    url(r'^sensordata/(?P<battery>.+)/$', SensorDataList.as_view()),
+    url('^sensordata/(?P<battery>.+)/$', SensorDataList.as_view()),
+
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
