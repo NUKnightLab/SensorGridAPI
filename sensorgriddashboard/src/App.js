@@ -7,6 +7,10 @@ import { XYFrame, OrdinalFrame } from "semiotic"
 import testJSON from "./testData.json"
 import realTestData from './realTestData';
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import HomePage from './components/HomePage';
+
+
 
 
 //Currently this component is the whole application, it has a few boilerplate
@@ -75,59 +79,62 @@ class App extends Component {
 
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          {/*This takes the batteryLife variable and displays it  */}
-        </p>
-        <div className='dashboard'>
-          <XYFrame
-            className='linegraph'
-            size={[400, 400]}
-            lines={this.state}
-            xAccessor="time"
-            yAccessor="battery"
-            yExtent={[0, 4]}
-            lineDataAccessor="line"
-            showLinePoints={true}
-            title={"Title of Graph"}
-            axes={variousAnnotations}
-            lineStyle={d => ({ stroke: 'red', fill: 'red' })}
-          />
-          <OrdinalFrame
-            className='barGraph'
-            size={[400, 400]}
-            data={this.state.bar}
-            axis={axis}
-            projection={'vertical'}
-            type={'bar'}
-
-
-
-            oLabel={true}
-            oPadding={20}
-            oAccessor={d => "Sensor " + d.sensor}
-            rAccessor={'data1'}
-
-            margin={{ left: 55, top: 0, bottom: 50, right: 0 }}
-
-          />
-        </div>
-        {/* <OrdinalFrame
-          size={[400, 600]}
-          data={test}
-          oAccessor={"sensor"}
-          rAccessor={"battery"}
-          style={{ fill: "#00a2ce", stroke: "white" }}
-          type={"bar"}
-          oLabel={true}
-        /> */}
-        <div>
-        </div>
-      </div>
+      // <div className="App">
+      //   <header className="App-header">
+      //     <img src={logo} className="App-logo" alt="logo" />
+      //     <h1 className="App-title">Welcome to React</h1>
+      //   </header>
+      //   <p className="App-intro">
+      //     {/*This takes the batteryLife variable and displays it  */}
+      //   </p>
+      //   <div className='dashboard'>
+      //     <XYFrame
+      //       className='linegraph'
+      //       size={[400, 400]}
+      //       lines={this.state}
+      //       xAccessor="time"
+      //       yAccessor="battery"
+      //       yExtent={[0, 4]}
+      //       lineDataAccessor="line"
+      //       showLinePoints={true}
+      //       title={"Title of Graph"}
+      //       axes={variousAnnotations}
+      //       lineStyle={d => ({ stroke: 'red', fill: 'red' })}
+      //     />
+      //     <OrdinalFrame
+      //       className='barGraph'
+      //       size={[400, 400]}
+      //       data={this.state.bar}
+      //       axis={axis}
+      //       projection={'vertical'}
+      //       type={'bar'}
+      //
+      //
+      //
+      //       oLabel={true}
+      //       oPadding={20}
+      //       oAccessor={d => "Sensor " + d.sensor}
+      //       rAccessor={'data1'}
+      //
+      //       margin={{ left: 55, top: 0, bottom: 50, right: 0 }}
+      //
+      //     />
+      //   </div>
+      //   {/* <OrdinalFrame
+      //     size={[400, 600]}
+      //     data={test}
+      //     oAccessor={"sensor"}
+      //     rAccessor={"battery"}
+      //     style={{ fill: "#00a2ce", stroke: "white" }}
+      //     type={"bar"}
+      //     oLabel={true}
+      //   /> */}
+      //   <div>
+      //   </div>
+      // </div>
+      <MuiThemeProvider>
+        <HomePage />
+      </MuiThemeProvider>
     );
   }
 }
