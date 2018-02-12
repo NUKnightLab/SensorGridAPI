@@ -7,7 +7,6 @@ import { XYFrame, OrdinalFrame } from "semiotic"
 import testJSON from "./testData.json"
 import realTestData from './realTestData';
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import HomePage from './components/HomePage';
 
 
@@ -132,9 +131,7 @@ class App extends Component {
       //   <div>
       //   </div>
       // </div>
-      <MuiThemeProvider>
-        <HomePage />
-      </MuiThemeProvider>
+      <HomePage />
     );
   }
 }
