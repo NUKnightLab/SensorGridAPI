@@ -61,7 +61,7 @@ router.register(r'data', SensorDataViewSet)
 # Create url extensions, and assign url frameworks to each extension
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    # url(r'^', include(router.urls)),
+    url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # url(r'^', include('sensordata.urls')),
     url(r'^sensordata/$', views.sensordata_list),
