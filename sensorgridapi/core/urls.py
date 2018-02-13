@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 from django.contrib import admin
-from api.models import SensorData
+from sensordata.models import SensorData
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -30,7 +30,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-# grabs SensorData data model from api/models.py
+# grabs SensorData data model from sensordata/models.py
 class SensorDataSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SensorData
@@ -60,5 +60,6 @@ router.register(r'data', SensorDataViewSet)
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^', include('sensordata.urls')),
 ]
