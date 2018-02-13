@@ -12,7 +12,11 @@ def sensordata_list(request, format=None):
     List all code snippets, or create a new snippet.
     """
     if request.method == 'GET':
+        print(request.GET)
+        print("HI!!")
         sensordata = SensorData.objects.all()
+        if 'node_id' in request.GET:
+            sensordata = sensordata.filter(node_id = request.GET['node_id'])
         serializer = SensorDataSerializer(sensordata, many=True)
         return Response(serializer.data)
 
