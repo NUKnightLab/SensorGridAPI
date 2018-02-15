@@ -1,11 +1,91 @@
 from rest_framework import serializers
 from sensordata.models import SensorData
 
-
+# serialize all data fields 
 class SensorDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = SensorData
-        fields = ('id', 'battery', 'created_at', 'data1', 'message_id', 'network', 'node_id', 'ram', 'recieved_at', 'record_id', 'timestamp', 'version')
+        fields = ('id', 'battery', 'created_at', 'data', 'data_type', 'message_id', 'network', 'node_id', 'ram', 'recieved_at', 'record_id', 'timestamp', 'version')
+        exclude = []
+
+# serialize only one data field
+class SensorDataSerializer_battery(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('battery',)
+        exclude = []
+
+class SensorDataSerializer_created_at(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('created_at',)
+        exclude = []
+
+class SensorDataSerializer_data(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('data',)
+        exclude = []
+
+class SensorDataSerializer_data_type(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('data_type',)
+        exclude = []
+
+class SensorDataSerializer_message_id(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('message_id',)
+        exclude = []
+
+class SensorDataSerializer_network(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('network',)
+        exclude = []
+
+class SensorDataSerializer_node_id(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('node_id',)
+        exclude = []
+
+class SensorDataSerializer_ram(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('ram',)
+        exclude = []
+
+class SensorDataSerializer_recieved_at(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('recieved_at',)
+        exclude = []
+
+class SensorDataSerializer_record_id(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('record_id',)
+        exclude = []
+
+class SensorDataSerializer_timestamp(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('timestamp',)
+        exclude = []
+
+class SensorDataSerializer_version(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('version',)
+        exclude = []
+
+# # serialize multiple, but not all, data fields
+class SensorDataSerializer_battery_created_at(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('battery','created_at',)
         exclude = []
 
 # may need different serializers for post and getf

@@ -3,7 +3,7 @@ from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from sensordata.models import SensorData
-from sensordata.serializers import SensorDataSerializer
+from sensordata.serializers import *
 from sensordata.models import SensorData
 
 @api_view(['GET', 'POST'])
@@ -15,9 +15,56 @@ def sensordata_list(request, format=None):
         print(request.GET)
         print("HI!!")
         sensordata = SensorData.objects.all()
+
+        # for filtering data by certain field conditions
+        # http://127.0.0.1:8000/sensordata/?node_id=1
         if 'node_id' in request.GET:
             sensordata = sensordata.filter(node_id = request.GET['node_id'])
-        serializer = SensorDataSerializer(sensordata, many=True)
+        elif 'created_at' in request.GET:
+            sensordata = sensordata.filter(created_at = request.GET['created_at'])
+        # for only showing certain fields of the data
+        if 'battery' in request.GET:
+            # http://127.0.0.1:8000/sensordata/?battery&created_at
+            if 'created_at' in request.GET:
+                serializer = SensorDataSerializer_battery_created_at(sensordata, many=True)
+            # http://127.0.0.1:8000/sensordata/?battery
+            else:
+                serializer = SensorDataSerializer_battery(sensordata, many=True)
+        # # http://127.0.0.1:8000/sensordata/?created_at
+        # elif 'created_at' in request.GET:
+        #     serializer = SensorDataSerializer_created_at(sensordata, many=True)
+        # http://127.0.0.1:8000/sensordata/?data
+        elif 'data' in request.GET:
+            serializer = SensorDataSerializer_data(sensordata, many=True)
+        # http://127.0.0.1:8000/sensordata/?data_type
+        elif 'data_type' in request.GET:
+            serializer = SensorDataSerializer_data_type(sensordata, many=True)
+        # http://127.0.0.1:8000/sensordata/?message_id
+        elif 'message_id' in request.GET:
+            serializer = SensorDataSerializer_message_id(sensordata, many=True)
+        # http://127.0.0.1:8000/sensordata/?network
+        elif 'network' in request.GET:
+            serializer = SensorDataSerializer_network(sensordata, many=True)
+        # # http://127.0.0.1:8000/sensordata/?node_id
+        # elif 'node_id' in request.GET:
+        #     serializer = SensorDataSerializer_node_id(sensordata, many=True)
+        # http://127.0.0.1:8000/sensordata/?ram
+        elif 'ram' in request.GET:
+            serializer = SensorDataSerializer_ram(sensordata, many=True)
+        # http://127.0.0.1:8000/sensordata/?received_at
+        elif 'received_at' in request.GET:
+            serializer = SensorDataSerializer_recieved_at(sensordata, many=True)
+         # http://127.0.0.1:8000/sensordata/?record_id
+        elif 'record_id' in request.GET:
+            serializer = SensorDataSerializer_record_id(sensordata, many=True)
+         # http://127.0.0.1:8000/sensordata/?timestamp
+        elif 'timestamp' in request.GET:
+            serializer = SensorDataSerializer_timestamp(sensordata, many=True)
+         # http://127.0.0.1:8000/sensordata/?version
+        elif 'version' in request.GET:
+            serializer = SensorDataSerializer_version(sensordata, many=True)
+        else: 
+            serializer = SensorDataSerializer(sensordata, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':

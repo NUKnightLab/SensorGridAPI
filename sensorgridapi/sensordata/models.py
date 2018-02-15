@@ -8,7 +8,8 @@ from django.db import models
 class SensorData(models.Model):
     battery = models.DecimalField(max_digits=3, decimal_places=2, null=True)
     created_at = models.DateTimeField(null=True)
-    data1 = models.IntegerField(null=True)
+    data = models.IntegerField(null=True)
+    data_type = models.CharField(max_length=100, blank=True, default='')
     # data2 = models.IntegerField(null=True)
     # data3 = models.IntegerField(null=True)
     message_id = models.IntegerField(null=True)
