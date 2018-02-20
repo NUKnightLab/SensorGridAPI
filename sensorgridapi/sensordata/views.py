@@ -12,8 +12,6 @@ def sensordata_list(request, format=None):
     List all code snippets, or create a new snippet.
     """
     if request.method == 'GET':
-        print(request.GET)
-        print("HI!!")
         sensordata = SensorData.objects.all()
 
         # for filtering data by certain field conditions
