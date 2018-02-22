@@ -22,6 +22,9 @@ def sensordata_list(request, format=None):
         elif 'created_at_gt' in request.GET:
             dt = datetime.datetime.fromtimestamp(int(request.GET['created_at_gt']))
             sensordata = sensordata.filter(created_at__gt = dt)
+        elif 'created_at_lt' in request.GET:
+            dt = datetime.datetime.fromtimestamp(int(request.GET['created_at_lt']))
+            sensordata = sensordata.filter(created_at__lt = dt)        
         # for only showing certain fields of the data
         if 'battery' in request.GET:
             # http://127.0.0.1:8000/sensordata/?battery&created_at
@@ -63,7 +66,7 @@ def sensordata_list(request, format=None):
          # http://127.0.0.1:8000/sensordata/?version
         elif 'version' in request.GET:
             serializer = SensorDataSerializer_version(sensordata, many=True)
-        else: 
+        else:
             serializer = SensorDataSerializer(sensordata, many=True)
         return Response(serializer.data)
 
