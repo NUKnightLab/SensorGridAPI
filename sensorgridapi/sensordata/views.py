@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from sensordata.models import SensorData
 from sensordata.serializers import *
 from sensordata.models import SensorData
+import datetime
 
 @api_view(['GET', 'POST'])
 def sensordata_list(request, format=None):
@@ -18,8 +19,9 @@ def sensordata_list(request, format=None):
         # http://127.0.0.1:8000/sensordata/?node_id=1
         if 'node_id' in request.GET:
             sensordata = sensordata.filter(node_id = request.GET['node_id'])
-        elif 'created_at' in request.GET:
-            sensordata = sensordata.filter(created_at = request.GET['created_at'])
+        elif 'created_at_gt' in request.GET:
+            dt = datetime.datetime.fromtimestamp(int(request.GET['created_at_gt']))
+            sensordata = sensordata.filter(created_at__gt = dt)
         # for only showing certain fields of the data
         if 'battery' in request.GET:
             # http://127.0.0.1:8000/sensordata/?battery&created_at
