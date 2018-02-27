@@ -19,9 +19,11 @@ def sensordata_list(request, format=None):
         # http://127.0.0.1:8000/sensordata/?node_id=1
         if 'node_id' in request.GET:
             sensordata = sensordata.filter(node_id = request.GET['node_id'])
+        # http://127.0.0.1:8000/sensordata/?created_at_gt=...    
         elif 'created_at_gt' in request.GET:
             dt = datetime.datetime.fromtimestamp(int(request.GET['created_at_gt']))
             sensordata = sensordata.filter(created_at__gt = dt)
+        # http://127.0.0.1:8000/sensordata/?created_at_lt=... 
         elif 'created_at_lt' in request.GET:
             dt = datetime.datetime.fromtimestamp(int(request.GET['created_at_lt']))
             sensordata = sensordata.filter(created_at__lt = dt)        
@@ -30,15 +32,28 @@ def sensordata_list(request, format=None):
             # http://127.0.0.1:8000/sensordata/?battery&created_at
             if 'created_at' in request.GET:
                 serializer = SensorDataSerializer_battery_created_at(sensordata, many=True)
+            # http://127.0.0.1:8000/sensordata/?battery&created_at
+            elif 'node_id_include' in request.GET:
+                serializer = SensorDataSerializer_battery_node_id(sensordata, many=True)
             # http://127.0.0.1:8000/sensordata/?battery
             else:
                 serializer = SensorDataSerializer_battery(sensordata, many=True)
-        # # http://127.0.0.1:8000/sensordata/?created_at
-        # elif 'created_at' in request.GET:
-        #     serializer = SensorDataSerializer_created_at(sensordata, many=True)
+
         # http://127.0.0.1:8000/sensordata/?data
         elif 'data' in request.GET:
-            serializer = SensorDataSerializer_data(sensordata, many=True)
+            if 'node_id_include' in request.GET:
+                # http://127.0.0.1:8000/sensordata/?data&data_type&node_id_include
+                if 'data_type' in request.GET:
+                    serializer = SensorDataSerializer_data_node_id_data_type(sensordata, many=True)
+                # http://127.0.0.1:8000/sensordata/?data&node_id_include
+                else:
+                    serializer = SensorDataSerializer_data_node_id(sensordata, many=True)
+            # http://127.0.0.1:8000/sensordata/?data&data_type
+            elif 'data_type' in request.GET:
+                serializer = SensorDataSerializer_data_data_type(sensordata, many=True)
+            # http://127.0.0.1:8000/sensordata/?data
+            else:
+                serializer = SensorDataSerializer_data(sensordata, many=True)
         # http://127.0.0.1:8000/sensordata/?data_type
         elif 'data_type' in request.GET:
             serializer = SensorDataSerializer_data_type(sensordata, many=True)
@@ -48,9 +63,6 @@ def sensordata_list(request, format=None):
         # http://127.0.0.1:8000/sensordata/?network
         elif 'network' in request.GET:
             serializer = SensorDataSerializer_network(sensordata, many=True)
-        # # http://127.0.0.1:8000/sensordata/?node_id
-        # elif 'node_id' in request.GET:
-        #     serializer = SensorDataSerializer_node_id(sensordata, many=True)
         # http://127.0.0.1:8000/sensordata/?ram
         elif 'ram' in request.GET:
             serializer = SensorDataSerializer_ram(sensordata, many=True)
@@ -60,12 +72,18 @@ def sensordata_list(request, format=None):
          # http://127.0.0.1:8000/sensordata/?record_id
         elif 'record_id' in request.GET:
             serializer = SensorDataSerializer_record_id(sensordata, many=True)
-         # http://127.0.0.1:8000/sensordata/?timestamp
+        # http://127.0.0.1:8000/sensordata/?timestamp
         elif 'timestamp' in request.GET:
-            serializer = SensorDataSerializer_timestamp(sensordata, many=True)
-         # http://127.0.0.1:8000/sensordata/?version
+            # http://127.0.0.1:8000/sensordata/?timestamp&node_id_include
+            if 'node_id_include' in request.GET:
+                serializer = SensorDataSerializer_timestamp_node_id(sensordata, many=True)
+            # http://127.0.0.1:8000/sensordata/?timestamp
+            else:
+                serializer = SensorDataSerializer_timestamp(sensordata, many=True)
+        # http://127.0.0.1:8000/sensordata/?version
         elif 'version' in request.GET:
             serializer = SensorDataSerializer_version(sensordata, many=True)
+        # http://127.0.0.1:8000/sensordata/
         else:
             serializer = SensorDataSerializer(sensordata, many=True)
         return Response(serializer.data)
