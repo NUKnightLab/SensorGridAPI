@@ -22,6 +22,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
+import Average from './Average.js'
 
 class HomePage extends Component {
   constructor(props) {
@@ -55,17 +56,13 @@ class HomePage extends Component {
             </Nav>
           </Collapse>
         </Navbar>
-        <div>
           <Battery className = "Battery" />
           <NavBar className = "Navigation"/>
           <MyGoogleMap />
-          
-
-
         </div>
       </div>
     )
   }
 }
 
-export default HomePage
+export default HomePage;
