@@ -88,6 +88,35 @@ class SensorDataSerializer_battery_created_at(serializers.ModelSerializer):
         fields = ('battery','created_at',)
         exclude = []
 
+class SensorDataSerializer_battery_node_id(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('battery','node_id',)
+        exclude = []
+
+class SensorDataSerializer_data_node_id(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('data','node_id',)
+        exclude = []
+
+class SensorDataSerializer_data_data_type(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('data','data_type',)
+        exclude = []
+
+class SensorDataSerializer_timestamp_node_id(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('timestamp','node_id',)
+        exclude = []
+
+class SensorDataSerializer_data_node_id_data_type(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('data','node_id','data_type',)
+        exclude = []
 # may need different serializers for post and getf
 # not going to post an id, for example
 
