@@ -1,0 +1,23 @@
+.tooltip-content {
+    background: white;
+    border: 1px solid black;
+    color: black;
+    padding: 10px;
+    z-index: 99;
+    min-width: 120px;
+   }
+  
+   .tooltip-content:before {
+    background: white;
+    content: '';
+    padding: 0px;
+    transform: rotate(45deg);
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    z-index: 99;
+   }
+  
+  .linegraph {
+    width: 700px
+  }

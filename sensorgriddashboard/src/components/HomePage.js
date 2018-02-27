@@ -3,6 +3,9 @@ import './HomePage.css'
 import NavBar from './NavBar'
 import Battery from './Battery'
 import MyGoogleMap from './MyGoogleMap'
+import TimeSeries from './TimeSeries'
+import realTestData from '../TestData/testData';
+
 import {
   Collapse,
   Navbar,
@@ -22,7 +25,6 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
-import Average from './Average.js'
 
 class HomePage extends Component {
   constructor(props) {
@@ -30,7 +32,8 @@ class HomePage extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      displayData: realTestData,
     };
   }
   toggle() {
@@ -58,8 +61,8 @@ class HomePage extends Component {
         </Navbar>
           <Battery className = "Battery" />
           <NavBar className = "Navigation"/>
+          <TimeSeries displayData={this.state.displayData}/>
           <MyGoogleMap />
-        </div>
       </div>
     )
   }
