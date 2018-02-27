@@ -3,48 +3,40 @@ import './App.css'
 import { scaleLinear } from 'd3'
 import { max } from 'd3'
 import { select } from 'd3'
+import { scaleTime } from 'd3-scale'
+import { XYFrame, OrdinalFrame } from "semiotic"
+
+
 class BarChart extends Component {
    constructor(props){
       super(props)
-      this.createBarChart = this.createBarChart.bind(this)
    }
-   componentDidMount() {
-      this.createBarChart()
-   }
-   componentDidUpdate() {
-      this.createBarChart()
-   }
-   createBarChart() {
-      const node = this.node
-      const dataMax = max(this.props.data)
-      const yScale = scaleLinear()
-         .domain([0, dataMax])
-         .range([0, this.props.size[1]])
-   select(node)
-      .selectAll('rect')
-      .data(this.props.data)
-      .enter()
-      .append('rect')
-
-   select(node)
-      .selectAll('rect')
-      .data(this.props.data)
-      .exit()
-      .remove()
-
-   select(node)
-      .selectAll('rect')
-      .data(this.props.data)
-      .style('fill', '#fe9922')
-      .attr('x', (d,i) => i * 25)
-      .attr('y', d => this.props.size[1] - yScale(d))
-      .attr('height', d => yScale(d))
-      .attr('width', 25)
-   }
+   
 render() {
-      return <svg ref={node => this.node = node}
-      width={500} height={500}>
-      </svg>
+      return (
+                <XYFrame
+                  size={[1200, 500]}
+                  lines={this.props.displayData}
+                  lineDataAccessor={"data"}
+                  lineStyle={d => ({ fill: d.color, fillOpacity: 0.5, stroke: d.color, strokeWidth: '3px' })}
+                  xAccessor="created_at"
+                  yAccessor="gasSensor"
+                  xScaleType={scaleTime()}
+                  lineIDAccessor="id"
+                  margin={{ "top": 60, "bottom": 65, "left": 60, "right": 20 }}
+                  hoverAnnotation={true}
+                  axes={[
+                    { orient: 'left', tickFormat: d => d },
+                    { ticks: 5, orient: 'bottom', tickFormat: d => {
+                      // console.log(typeof d)
+                      // console.log(d.toString().split(" "))
+                      // console.log(d.toString().split(" ")[1] + " " + d.toString().split(" ")[2])
+                      return  d.toString().split(" ")[1] + " " + d.toString().split(" ")[2]
+                    }
+                    }
+                  ]}
+                />
+          );
    }
 }
 export default BarChart

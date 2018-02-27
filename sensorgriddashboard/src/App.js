@@ -6,6 +6,9 @@ import BarChart from './BarChart'
 import { XYFrame, OrdinalFrame } from "semiotic"
 import testJSON from "./testData.json"
 import realTestData from './realTestData';
+import { scaleTime } from 'd3-scale'
+
+
 
 
 
@@ -16,9 +19,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      line: realTestData.line,
-      bar: realTestData.bar
-
+      displayData: realTestData,
     };
   }
   componentWillMount() {
@@ -34,7 +35,6 @@ class App extends Component {
   }
 
   convertTime(dateArr) {
-    var convertedDataArr = []
     var obj = {}
 
     dateArr.forEach((item) => {
@@ -48,15 +48,34 @@ class App extends Component {
   }
   render() {
 
-    console.log('converted', this.convertTime(this.state.line))
     //Render is the most important function of a react component
     //This is where are describing what the component is displaying
     // var batteryLife = this.state.data[0].battery;
 
-    const variousAnnotations = [
-      { orient: 'left', label: 'Battery Life' },
-      { orient: "bottom", label: "Time" }
-    ]
+  //   const displayData = [
+  //     { id: 'linedata-1', color: '#00a2ce', 
+  //        data: [ 
+  //             { sales: 500, daysSinceRelease: 1 }, 
+  //             { sales: 700, daysSinceRelease: 2 }, 
+  //             { sales: 0, daysSinceRelease: 3 }, 
+  //             { sales: 0, daysSinceRelease: 4 }, 
+  //             { sales: 200, daysSinceRelease: 5 }, 
+  //             { sales: 300, daysSinceRelease: 6 }, 
+  //             { sales: 500, daysSinceRelease: 7 } 
+  //            ] 
+  //     },
+  //     { id: 'linedata-2', color: '#FFa2ce', 
+  //     data: [ 
+  //          { sales: 500, daysSinceRelease: 1 }, 
+  //          { sales: 600, daysSinceRelease: 2 }, 
+  //          { sales: 100, daysSinceRelease: 3 }, 
+  //          { sales: 100, daysSinceRelease: 4 }, 
+  //          { sales: 200, daysSinceRelease: 5 }, 
+  //          { sales: 200, daysSinceRelease: 6 }, 
+  //          { sales: 500, daysSinceRelease: 7 } 
+  //         ] 
+  //  }
+  // ]
     const test = testJSON.barTest
     console.log(test)
 
@@ -72,7 +91,7 @@ class App extends Component {
 
     // const data = [{ "funnelKey": "#00a2ce", "stepName": "visits", "stepValue": 1000 }, { "funnelKey": "#00a2ce", "stepName": "registration", "stepValue": 900 }, { "funnelKey": "#00a2ce", "stepName": "mop", "stepValue": 500 }]
 
-
+  
 
     return (
       <div className="App">
@@ -84,37 +103,7 @@ class App extends Component {
           {/*This takes the batteryLife variable and displays it  */}
         </p>
         <div className='dashboard'>
-          <XYFrame
-            className='linegraph'
-            size={[400, 400]}
-            lines={this.state}
-            xAccessor="time"
-            yAccessor="battery"
-            yExtent={[0, 4]}
-            lineDataAccessor="line"
-            showLinePoints={true}
-            title={"Title of Graph"}
-            axes={variousAnnotations}
-            lineStyle={d => ({ stroke: 'red', fill: 'red' })}
-          />
-          <OrdinalFrame
-            className='barGraph'
-            size={[400, 400]}
-            data={this.state.bar}
-            axis={axis}
-            projection={'vertical'}
-            type={'bar'}
-
-
-
-            oLabel={true}
-            oPadding={20}
-            oAccessor={d => "Sensor " + d.sensor}
-            rAccessor={'data1'}
-
-            margin={{ left: 55, top: 0, bottom: 50, right: 0 }}
-
-          />
+        <BarChart displayData={this.state.displayData}></BarChart>
         </div>
         {/* <OrdinalFrame
           size={[400, 600]}
