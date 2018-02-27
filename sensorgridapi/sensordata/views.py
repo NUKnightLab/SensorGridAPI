@@ -1,9 +1,11 @@
 from rest_framework import status
+from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from sensordata.models import SensorData
-from sensordata.serializers import SensorDataSerializer
-
+from sensordata.serializers import *
+from sensordata.models import SensorData
+import datetime
 
 @api_view(['GET', 'POST'])
 def sensordata_list(request, format=None):
@@ -12,7 +14,60 @@ def sensordata_list(request, format=None):
     """
     if request.method == 'GET':
         sensordata = SensorData.objects.all()
-        serializer = SensorDataSerializer(sensordata, many=True)
+
+        # for filtering data by certain field conditions
+        # http://127.0.0.1:8000/sensordata/?node_id=1
+        if 'node_id' in request.GET:
+            sensordata = sensordata.filter(node_id = request.GET['node_id'])
+        elif 'created_at_gt' in request.GET:
+            dt = datetime.datetime.fromtimestamp(int(request.GET['created_at_gt']))
+            sensordata = sensordata.filter(created_at__gt = dt)
+        elif 'created_at_lt' in request.GET:
+            dt = datetime.datetime.fromtimestamp(int(request.GET['created_at_lt']))
+            sensordata = sensordata.filter(created_at__lt = dt)        
+        # for only showing certain fields of the data
+        if 'battery' in request.GET:
+            # http://127.0.0.1:8000/sensordata/?battery&created_at
+            if 'created_at' in request.GET:
+                serializer = SensorDataSerializer_battery_created_at(sensordata, many=True)
+            # http://127.0.0.1:8000/sensordata/?battery
+            else:
+                serializer = SensorDataSerializer_battery(sensordata, many=True)
+        # # http://127.0.0.1:8000/sensordata/?created_at
+        # elif 'created_at' in request.GET:
+        #     serializer = SensorDataSerializer_created_at(sensordata, many=True)
+        # http://127.0.0.1:8000/sensordata/?data
+        elif 'data' in request.GET:
+            serializer = SensorDataSerializer_data(sensordata, many=True)
+        # http://127.0.0.1:8000/sensordata/?data_type
+        elif 'data_type' in request.GET:
+            serializer = SensorDataSerializer_data_type(sensordata, many=True)
+        # http://127.0.0.1:8000/sensordata/?message_id
+        elif 'message_id' in request.GET:
+            serializer = SensorDataSerializer_message_id(sensordata, many=True)
+        # http://127.0.0.1:8000/sensordata/?network
+        elif 'network' in request.GET:
+            serializer = SensorDataSerializer_network(sensordata, many=True)
+        # # http://127.0.0.1:8000/sensordata/?node_id
+        # elif 'node_id' in request.GET:
+        #     serializer = SensorDataSerializer_node_id(sensordata, many=True)
+        # http://127.0.0.1:8000/sensordata/?ram
+        elif 'ram' in request.GET:
+            serializer = SensorDataSerializer_ram(sensordata, many=True)
+        # http://127.0.0.1:8000/sensordata/?received_at
+        elif 'received_at' in request.GET:
+            serializer = SensorDataSerializer_recieved_at(sensordata, many=True)
+         # http://127.0.0.1:8000/sensordata/?record_id
+        elif 'record_id' in request.GET:
+            serializer = SensorDataSerializer_record_id(sensordata, many=True)
+         # http://127.0.0.1:8000/sensordata/?timestamp
+        elif 'timestamp' in request.GET:
+            serializer = SensorDataSerializer_timestamp(sensordata, many=True)
+         # http://127.0.0.1:8000/sensordata/?version
+        elif 'version' in request.GET:
+            serializer = SensorDataSerializer_version(sensordata, many=True)
+        else:
+            serializer = SensorDataSerializer(sensordata, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
@@ -47,3 +102,21 @@ def sensordata_detail(request, pk, format=None):
     elif request.method == 'DELETE':
         sensordata.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class SensorDataList(generics.ListAPIView):
+    serializer_class = SensorDataSerializer
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `username` query parameter in the URL.
+        """
+        # queryset = SensorData.objects.all()
+        # battery = self.request.query_params.get('battery', None)
+        # if battery is not None:
+        #     queryset = queryset.filter(sensordata__battery=battery)
+        # return queryset
+
+        battery = self.kwargs['battery']
+        # return SensorData.objects.filter(battery=3.72)
+        return None

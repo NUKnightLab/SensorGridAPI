@@ -1,0 +1,11 @@
+
+#NodeBattery {
+    text-align: center;
+    height: 200px;
+    width: 142px;
+    color: #61a08e;
+    border-radius: 7.5px;
+    position: fixed;
+    left: 2%;
+}
+
