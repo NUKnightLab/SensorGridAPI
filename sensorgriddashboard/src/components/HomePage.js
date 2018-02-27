@@ -14,6 +14,7 @@ import {
     Jumbotron,
     Button
 } from 'reactstrap';
+import Average from './Average.js'
 
 class HomePage extends Component {
   constructor(props) {
@@ -47,9 +48,10 @@ render() {
                   </Nav>
             </Collapse>
           </Navbar>
+          <Average />
         </div>
       )
    }
 }
 
-export default HomePage
+export default HomePage;
