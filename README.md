@@ -52,3 +52,19 @@ If the installation process runs successfully, you can start the dashboard by ru
 ```
 npm start
 ```
+
+# API endpoints
+`/sensordata/?node_id=<INT>` - Returns an array of sensor data objects with the corresponding ID.
+
+`/sensordata/created_at_lt=<EPOCH>` - Returns an array of sensor data objects created before the epoch timestamp inputted.
+
+`/sensordata/created_at_gt=<EPOCH>` - Returns an array of sensor data objects created after the epoch timestamp inputted.
+
+`/sensordata/?battery&node_id_include` - Returns an array of objects containing a node's ID and battery.
+
+`/sensordata/?battery&node_id=<INT>` - Returns an array of objects containing the battery values of the specified node ID.
+
+`/sensordata/?data&data_type&node_id=<INT>` - Returns an array of objects corresponding to the specified node ID with the value of each sensor's data point and SensorDataSerializer_timestamp corresponding data type.
+
+`/sensordata/?data&data_type&node_id_include` - Returns an array of objects containing each node's ID, data value, and data type.
+
