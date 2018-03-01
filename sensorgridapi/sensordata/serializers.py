@@ -5,7 +5,7 @@ from sensordata.models import SensorData
 class SensorDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = SensorData
-        fields = ('id', 'battery', 'created_at', 'data', 'data_type', 'message_id', 'network', 'node_id', 'ram', 'recieved_at', 'record_id', 'timestamp', 'version')
+        fields = ('id', 'battery', 'created_at', 'data', 'data_type', 'message_id', 'network', 'node_id', 'latitude', 'longitude', 'ram', 'recieved_at', 'record_id', 'timestamp', 'version')
         exclude = []
 
 # serialize only one data field
@@ -81,6 +81,18 @@ class SensorDataSerializer_version(serializers.ModelSerializer):
         fields = ('version',)
         exclude = []
 
+class SensorDataSerializer_latitude(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('latitude',)
+        exclude = []
+
+class SensorDataSerializer_longitude(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('longitude',)
+        exclude = []
+
 # # serialize multiple, but not all, data fields
 class SensorDataSerializer_battery_created_at(serializers.ModelSerializer):
     class Meta:
@@ -116,6 +128,24 @@ class SensorDataSerializer_data_node_id_data_type(serializers.ModelSerializer):
     class Meta:
         model = SensorData
         fields = ('data','node_id','data_type',)
+        exclude = []
+
+class SensorDataSerializer_latitude_longitude_node_id(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('latitude','longitude', 'node_id',)
+        exclude = []
+
+class SensorDataSerializer_latitude_node_id(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('latitude','node_id',)
+        exclude = []
+
+class SensorDataSerializer_longitude_node_id(serializers.ModelSerializer):
+    class Meta:
+        model = SensorData
+        fields = ('longitude','node_id',)
         exclude = []
 # may need different serializers for post and getf
 # not going to post an id, for example
