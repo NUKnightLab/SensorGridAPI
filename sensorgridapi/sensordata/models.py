@@ -18,7 +18,7 @@ class SensorData(models.Model):
     recieved_at = models.DateTimeField(auto_now_add=True)
     record_id = models.CharField(max_length=100, blank=True, default='')
     timestamp = models.DateTimeField(auto_now_add=True)
-    version = models.IntegerField(null=True)
+    version = models.DecimalField(max_digits=3, decimal_places=2, null=True)
 
     class Meta:
         ordering = ('id',)
