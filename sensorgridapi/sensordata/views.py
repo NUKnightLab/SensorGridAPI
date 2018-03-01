@@ -63,6 +63,28 @@ def sensordata_list(request, format=None):
         # http://127.0.0.1:8000/sensordata/?network
         elif 'network' in request.GET:
             serializer = SensorDataSerializer_network(sensordata, many=True)
+        elif 'latitude' in request.GET:
+            if 'node_id_include' in request.GET:
+                # http://127.0.0.1:8000/sensordata/?latitude&longitude&node_id_include
+                if 'longitude' in request.GET:
+                    serializer = SensorDataSerializer_latitude_longitude_node_id(sensordata, many=True)
+                # http://127.0.0.1:8000/sensordata/?latitude&node_id_include
+                else:
+                    serializer = SensorDataSerializer_latitude_node_id(sensordata, many=True)
+            else:
+                # http://127.0.0.1:8000/sensordata/?latitude
+                serializer = SensorDataSerializer_latitude(sensordata, many=True)
+        elif 'longitude' in request.GET:
+            if 'node_id_include' in request.GET:
+                # http://127.0.0.1:8000/sensordata/?latitude&longitude&node_id_include
+                if 'latitude' in request.GET:
+                    serializer = SensorDataSerializer_latitude_longitude_node_id(sensordata, many=True)
+                # http://127.0.0.1:8000/sensordata/?longitude&node_id_include
+                else:
+                    serializer = SensorDataSerializer_longitude_node_id(sensordata, many=True)
+            else:
+                # http://127.0.0.1:8000/sensordata/?longitude
+                serializer = SensorDataSerializer_longitude(sensordata, many=True)
         # http://127.0.0.1:8000/sensordata/?ram
         elif 'ram' in request.GET:
             serializer = SensorDataSerializer_ram(sensordata, many=True)
