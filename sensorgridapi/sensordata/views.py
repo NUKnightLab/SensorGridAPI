@@ -15,7 +15,9 @@ def sensordata_list(request, format=None):
     if request.method == 'GET':
         sensordata = SensorData.objects.all()
 
+        # **********************************************
         # for filtering data by certain field conditions
+        # **********************************************
         # http://127.0.0.1:8000/sensordata/?node_id=1
         if 'node_id' in request.GET:
             sensordata = sensordata.filter(node_id = request.GET['node_id'])
@@ -26,8 +28,11 @@ def sensordata_list(request, format=None):
         # http://127.0.0.1:8000/sensordata/?created_at_lt=... 
         elif 'created_at_lt' in request.GET:
             dt = datetime.datetime.fromtimestamp(int(request.GET['created_at_lt']))
-            sensordata = sensordata.filter(created_at__lt = dt)        
+            sensordata = sensordata.filter(created_at__lt = dt)    
+
+        # *******************************************
         # for only showing certain fields of the data
+        # *******************************************
         if 'battery' in request.GET:
             # http://127.0.0.1:8000/sensordata/?battery&created_at
             if 'created_at' in request.GET:
@@ -106,6 +111,11 @@ def sensordata_list(request, format=None):
         elif 'version' in request.GET:
             serializer = SensorDataSerializer_version(sensordata, many=True)
         # http://127.0.0.1:8000/sensordata/
+
+        # ********************************************
+        # if no filtering or specific viewing requests
+        # are made, serialize the entire data model
+        # ********************************************
         else:
             serializer = SensorDataSerializer(sensordata, many=True)
         return Response(serializer.data)
@@ -146,17 +156,3 @@ def sensordata_detail(request, pk, format=None):
 class SensorDataList(generics.ListAPIView):
     serializer_class = SensorDataSerializer
 
-    def get_queryset(self):
-        """
-        Optionally restricts the returned purchases to a given user,
-        by filtering against a `username` query parameter in the URL.
-        """
-        # queryset = SensorData.objects.all()
-        # battery = self.request.query_params.get('battery', None)
-        # if battery is not None:
-        #     queryset = queryset.filter(sensordata__battery=battery)
-        # return queryset
-
-        battery = self.kwargs['battery']
-        # return SensorData.objects.filter(battery=3.72)
-        return None

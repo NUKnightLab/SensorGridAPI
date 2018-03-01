@@ -8,5 +8,6 @@ from .models import SensorData
 
 class SensorDataAdmin(admin.ModelAdmin):
     pass
-#creating the
+
+#creating the admin
 admin.site.register(SensorData, SensorDataAdmin)
