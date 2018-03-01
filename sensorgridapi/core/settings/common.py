@@ -16,7 +16,7 @@ from os import environ as env
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-ALLOWED_HOSTS = env.get('APPLICATION_DOMAINS', '').split() + ['127.0.0.1']
+ALLOWED_HOSTS = env.get('APPLICATION_DOMAINS', '').split() + ['localhost', '127.0.0.1']
 
 
 # Application definition
