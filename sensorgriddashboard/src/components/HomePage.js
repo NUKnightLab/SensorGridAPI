@@ -4,6 +4,7 @@ import NavBar from './NavBar'
 import Battery from './Battery'
 import MyGoogleMap from './MyGoogleMap'
 import TimeSeries from './TimeSeries'
+import Average from './Average'
 import realTestData from '../TestData/testData';
 
 import {
@@ -54,15 +55,32 @@ class HomePage extends Component {
                 <NavLink href="/components/">Components</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">Github</NavLink>
+                <NavLink href="https://github.com/NUKnightLab/SensorGridAPI">Github</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
-          <Battery className = "Battery" />
-          <NavBar className = "Navigation"/>
-          <TimeSeries displayData={this.state.displayData}/>
-          <MyGoogleMap />
+        <Battery className = "Battery" />
+        <NavBar className = "Navigation"/>
+        <Container>
+          <Row>
+            <MyGoogleMap />
+          </Row>
+          <Row>
+            <h2>Gas</h2>
+          </Row>
+          <Row>
+            <Col>
+              <Average />
+            </Col>
+            <Col>
+              <Average />
+            </Col>
+          </Row>
+          <Row>
+            <TimeSeries displayData={this.state.displayData}/>
+          </Row>
+        </Container>
       </div>
     )
   }
