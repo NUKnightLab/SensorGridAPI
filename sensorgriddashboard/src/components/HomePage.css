@@ -2,3 +2,7 @@
   height: 10000px;
   background-color: aqua;
 }
+
+.container {
+  margin-left: 15% !important
+}
