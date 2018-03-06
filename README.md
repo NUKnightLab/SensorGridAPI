@@ -1,7 +1,7 @@
 # SensorGridAPI
 Web API and dashboard for SensorGrid
 
-## API
+## API Setup
 To get the Django REST API set up:
 
 `git clone https://github.com/NUKnightLab/SensorGridAPI.git`
@@ -54,6 +54,10 @@ npm start
 ```
 
 # API endpoints
+Note that for any endpoint you can include a `node_id=<INT>` to return only the data from that node. On the other hand, the command `node_id_include` will return a subset of the data model with `node_id` values, but will not allow you to filter that subset according to a specific `node_id`.
+
+Below are the most vital endpoints for our SensorGrid Dashboard. To see all endpoints, go to `./sensorgridapi/sensordata/views.py`.
+
 `/sensordata/?node_id=<INT>` - Returns an array of sensor data objects with the corresponding ID.
 
 `/sensordata/created_at_lt=<EPOCH>` - Returns an array of sensor data objects created before the epoch timestamp inputted.
@@ -67,4 +71,3 @@ npm start
 `/sensordata/?data&data_type&node_id=<INT>` - Returns an array of objects corresponding to the specified node ID with the value of each sensor's data point and SensorDataSerializer_timestamp corresponding data type.
 
 `/sensordata/?data&data_type&node_id_include` - Returns an array of objects containing each node's ID, data value, and data type.
-
