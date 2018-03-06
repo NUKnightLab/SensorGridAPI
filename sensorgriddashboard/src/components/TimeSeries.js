@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { scaleTime } from 'd3-scale'
 import { XYFrame, OrdinalFrame } from "semiotic"
 import './TimeSeries.css';
+import moment from 'moment';
+import { Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle, Button } from 'reactstrap';
+
 
 
 
@@ -11,9 +15,13 @@ class TimeSeries extends Component {
    }
    
 render() {
+
       return (
+            <Card className='time-series-card'>
+              <CardTitle className='card-title'>Sensor Grid Time Series Data</CardTitle>
+              <CardSubtitle className='card-title'>Data 1 Measurements</CardSubtitle>
                 <XYFrame
-                  size={[1200, 500]}
+                  size={[1050, 500]}
                   lines={this.props.displayData}
                   lineDataAccessor={"data"}
                   lineStyle={d => ({ fill: d.color, fillOpacity: 0.5, stroke: d.color, strokeWidth: '3px' })}
@@ -21,19 +29,20 @@ render() {
                   yAccessor="gasSensor"
                   xScaleType={scaleTime()}
                   lineIDAccessor="id"
-                  margin={{ "top": 60, "bottom": 65, "left": 260, "right": 20 }}
+                  margin={{ "top": 15, "bottom": 65, "left": 50, "right": 25 }}
                   hoverAnnotation={true}
                   axes={[
                     { orient: 'left', tickFormat: d => d },
-                    { ticks: 5, orient: 'bottom', tickFormat: d => {
-                      // console.log(typeof d)
-                      // console.log(d.toString().split(" "))
-                      // console.log(d.toString().split(" ")[1] + " " + d.toString().split(" ")[2])
-                      return  d.toString().split(" ")[1] + " " + d.toString().split(" ")[2]
-                    }
-                    }
+                    { ticks: 5, orient: 'bottom', tickFormat: d => {return moment(d).format("MM/DD")}}
                   ]}
-                />
+                  tooltipContent={d => 
+                    <div className="tooltip-content" >
+                      <p>Data Reading: {d.gasSensor}</p>
+                      <p>Date: {d.created_at.toString()}</p>
+                   </div>}
+                  />
+              </Card>
+                
           );
    }
 }
