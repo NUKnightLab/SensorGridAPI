@@ -1,12 +1,15 @@
 var fs = require("fs")
 
+days_in_month = {1:31, 2:28, 3:31, 4:30, 5:31, 6:30, 7:31, 8:31, 9:30, 10:31, 11:30, 12:31}
+
 function mkJson() {
   var sensordata = []
   var data_types = ['gas', 'pm10', 'pm2.5', 'temp', 'humidity']
   var node_id_lat = {1: 42.0556589, 2: 42.0413013, 3: 42.0507029, 4: 42.074439, 5: 42.0611052}
   var node_id_long = {1: -87.6831799, 2: -87.6800576, 3: -87.6741602, 4: -87.6842669, 5: -87.6765987}
   for (var mo = 0; mo < 12; mo++) {
-    for (var day = 1; day <= 28; day++) {
+    len_month = days_in_month[mo]
+    for (var day = 1; day <= len_month; day++) {
       for (var hr = 0; hr < 24; hr++) {
         var battery = (Math.random() * 5).toFixed(2)
         var created_at = new Date(2017, mo, day, hr);
