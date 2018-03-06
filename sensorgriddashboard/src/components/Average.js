@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import { Container, Row, Col, Collapse, Button, CardBody, Card, ListGroup, ListGroupItem } from 'reactstrap';
+import './Average.css'
 
 class Average extends Component {
   constructor(props) {
@@ -40,14 +41,14 @@ class Average extends Component {
   render() {
     return (
       <div>
-        <Card onClick={this.toggle}>
+        <Card onClick={this.toggle} className='average-card'>
 
             <Container>
               <Row>
                 <h1>Average</h1>
               </Row>
               <Row>
-                <h2>{this.state.average}</h2>
+                <h2 className='average'>{this.state.average}</h2>
               </Row>
               <Collapse isOpen={this.state.collapse}>
               <Row>
