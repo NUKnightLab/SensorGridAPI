@@ -21,3 +21,5 @@ for i in range(up_to, len(data)):
 	r = requests.post(site_url, data=data[i])
 	print(r)
 	time.sleep(randint(15,60))
+	if r.status_code==400:
+		break
