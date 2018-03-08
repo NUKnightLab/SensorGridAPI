@@ -11,7 +11,7 @@ up_to = 0
 data = json.load(open('data.json'))
 
 # specify site url
-site_url = 'http://127.0.0.1:8000/sensordata/'
+site_url = 'https://sensorgridapi.knightlab.com/sensordata/'
 # local server site: 'http://127.0.0.1:8000/sensordata/'
 # production site: 'https://sensorgridapi.knightlab.com/sensordata/'
 
