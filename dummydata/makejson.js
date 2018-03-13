@@ -16,36 +16,36 @@ function mkJson() {
         var data_type = Math.floor((Math.random() * 4) + 1);
         var data = 0
         if (data_type == 0) {
-          data = (Math.random() * 5).toFixed(2)
+          data = (Math.random() * 5).toFixed(1)
         }
         else if (data_type == 1) {
-          data = (Math.random() * 10).toFixed(2)
+          data = (Math.random() * 10).toFixed(1)
         }
         else if (data_type == 2) {
-          data = (Math.random() * 3).toFixed(2)
+          data = (Math.random() * 3).toFixed(1)
         }
         else if (data_type == 3) {
           if (mo == 1 || mo == 2 || mo == 12) {
-            data = (Math.random() * 40).toFixed(2)
+            data = (Math.random() * 40).toFixed(1)
           }
           else if (mo == 3 || mo == 11) {
-            data = (30 + (Math.random() * 20)).toFixed(2)
+            data = (30 + (Math.random() * 20)).toFixed(1)
           }
           else if (mo == 4 || mo == 10) {
-            data = (40 + (Math.random() * 25)).toFixed(2)
+            data = (40 + (Math.random() * 25)).toFixed(1)
           }
           else if (mo == 5 || mo == 6) {
-            data = (50 + (Math.random() * 30)).toFixed(2)
+            data = (50 + (Math.random() * 30)).toFixed(1)
           }
           else if (mo == 7 || mo == 8) {
-            data = (65 + (Math.random() * 25)).toFixed(2)
+            data = (65 + (Math.random() * 25)).toFixed(1)
           }
           else if (mo == 9) {
-            data = (55 + (Math.random() * 20)).toFixed(2)
+            data = (55 + (Math.random() * 20)).toFixed(1)
           }
         }
         else if (data_type == 4) {
-          data = (60 + (Math.random() * 25)).toFixed(2)
+          data = (60 + (Math.random() * 25)).toFixed(1)
         }
         var message_id = Math.floor(Math.random() * 1000);
         var network = Math.floor(Math.random() * 7);

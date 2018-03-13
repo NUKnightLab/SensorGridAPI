@@ -4,7 +4,7 @@ import time
 from random import randint
 
 # note: pushed data up to 14
-up_to = 0
+up_to = 142
 # Tuesday, March 6, 11:20AM
 
 # read in dummy data file created by makejson.js
