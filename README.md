@@ -1,6 +1,13 @@
 # SensorGridAPI
 Web API and dashboard for SensorGrid
 
+The API reads data in from the SensorGrid nodes, and then formats that data into JSON objects to be fed in to the dashboard. The dashboard then visualizes that data in a series of graphs and charts. 
+
+To see the documentation for the dashboard, click here
+
+To see the documentation for the API, click here
+
+
 ## API Setup
 To get the Django REST API set up:
 
