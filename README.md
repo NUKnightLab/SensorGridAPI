@@ -4,7 +4,6 @@ Web API and dashboard for SensorGrid
 ## API Setup
 To get the Django REST API set up:
 
-`git clone https://github.com/NUKnightLab/SensorGridAPI.git`
 ```
 git clone https://github.com/NUKnightLab/SensorGridAPI.git
 cd SensorGridAPI
@@ -27,7 +26,7 @@ cd sensorgridapi
 ```
 To create a basic database:
 ```
-./manage.py makemigration <APPNAME>
+./manage.py makemigrations <APPNAME>
 ./manage.py migrate
 ```
 To start a local server and view the admin backend:
