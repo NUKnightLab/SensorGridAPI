@@ -1,5 +1,5 @@
 # SensorGrid API + SensorGrid Dashboard
-Web API and dashboard for the KnightLab Studio SensorGrid project.
+Web API and dashboard for the Knight Lab Studio SensorGrid project.
 
 The API reads data in from the SensorGrid nodes, and then formats that data into JSON objects to be fed in to the dashboard. The dashboard then visualizes that data in a series of graphs and charts. 
 
