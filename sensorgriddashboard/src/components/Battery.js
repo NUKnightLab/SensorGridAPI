@@ -7,7 +7,8 @@ import {
     ListGroup,
     ListGroupItem,
     Progress,
-    Table
+    Table,
+    Card
 } from 'reactstrap';
 //import * as FontAwesome from 'react-icons/lib/fa'
 import { FaBattery4, FaBattery2, FaBattery1, FaSignal, FaCheckCircle, FaExclamationCircle } from 'react-icons/lib/fa';
@@ -37,9 +38,10 @@ class Battery extends Component {
 
     render() {
         console.log('battery', this.props.data)
-        
+
         return (
             <div>
+              <Card>
                 <Table hover id = "summary">
                     <thead>
                         <tr>
@@ -68,6 +70,18 @@ class Battery extends Component {
                             <td><FaSignal size="30px" color = "red"/></td>
                             <td><FaCheckCircle size = "35px"/></td>
                         </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td>{this.getBattery(this.state.data[3])}</td>
+                            <td><FaSignal size="30px"/></td>
+                            <td><FaCheckCircle size = "35px" color = "red"/></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5</th>
+                            <td>{this.getBattery(this.state.data[4])}</td>
+                            <td><FaSignal size="30px"/></td>
+                            <td><FaCheckCircle size = "35px"/></td>
+                        </tr>
                     </tbody>
                 </Table>
 
@@ -75,6 +89,7 @@ class Battery extends Component {
                 <div>
 
                 </div>
+              </Card>
             </div>
         )
     }

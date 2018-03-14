@@ -79,7 +79,7 @@ class HomePage extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/components/">Components</NavLink>
+                <NavLink href="https://sensorgridapi.knightlab.com/sensordata/">API</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="https://github.com/NUKnightLab/SensorGridAPI">Github</NavLink>
@@ -90,10 +90,13 @@ class HomePage extends Component {
         <Container>
           <Row>
             <Col>
+
               <Battery data={this.state.batteryArr}/>
+
             </Col>
             <Col>
               <TabContainer />
+
             </Col>
           </Row>
         </Container>

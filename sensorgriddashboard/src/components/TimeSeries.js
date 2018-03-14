@@ -21,7 +21,7 @@ render() {
               <CardTitle className='card-title'>Sensor Grid Time Series Data</CardTitle>
               <CardSubtitle className='card-title'>Data 1 Measurements</CardSubtitle>
                 <XYFrame
-                  size={[1050, 500]}
+                  size={[600, 300]}
                   lines={this.props.displayData}
                   lineDataAccessor={"data"}
                   lineStyle={d => ({ fill: d.color, fillOpacity: 0.5, stroke: d.color, strokeWidth: '3px' })}
