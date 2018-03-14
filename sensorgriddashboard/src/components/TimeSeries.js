@@ -35,14 +35,14 @@ render() {
                     { orient: 'left', tickFormat: d => d },
                     { ticks: 5, orient: 'bottom', tickFormat: d => {return moment(d).format("MM/DD")}}
                   ]}
-                  tooltipContent={d => 
+                  tooltipContent={d =>
                     <div className="tooltip-content" >
                       <p>Data Reading: {d.gasSensor}</p>
                       <p>Date: {d.created_at.toString()}</p>
                    </div>}
                   />
               </Card>
-                
+
           );
    }
 }
