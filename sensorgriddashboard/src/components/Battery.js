@@ -17,11 +17,12 @@ class Battery extends Component {
         super(props);
 
         this.state = {
-            data: [3.6, 3.9, 4.1]
+            data: this.props.data
         }
     }
 
     getBattery(reading) {
+        reading = parseInt(reading)
         if (reading < 3.8) {
             return <FaBattery1 size="40px" color="red" />;
         } else if (reading >= 3.8 && reading < 4.0) {
@@ -36,6 +37,7 @@ class Battery extends Component {
 
 
     render() {
+        console.log('battery', this.props.data)
 
         return (
             <div>
@@ -52,19 +54,19 @@ class Battery extends Component {
                     <tbody>
                         <tr>
                             <th scope="row">1</th>
-                            <td>{this.getBattery(this.state.data[0])}</td>
+                            <td>{this.getBattery(this.props.data[0])}</td>
                             <td><FaSignal size="30px" /></td>
                             <td><FaExclamationCircle size = "35px" color="red" /></td>
                         </tr>
                         <tr>
                             <th scope="row">2</th>
-                            <td>{this.getBattery(this.state.data[1])}</td>
+                            <td>{this.getBattery(this.props.data[1])}</td>
                             <td><FaSignal size="30px" /></td>
                             <td><FaCheckCircle size = "35px"/></td>
                         </tr>
                         <tr>
                             <th scope="row">3</th>
-                            <td>{this.getBattery(this.state.data[2])}</td>
+                            <td>{this.getBattery(this.props.data[2])}</td>
                             <td><FaSignal size="30px" color = "red"/></td>
                             <td><FaCheckCircle size = "35px"/></td>
                         </tr>

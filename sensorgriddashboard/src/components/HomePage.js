@@ -8,6 +8,7 @@ import Average from './Average'
 import TabContainer from './TabContainer'
 import SummaryBar from './SummaryBar'
 import realTestData from '../TestData/testData';
+import getData from '../APIFunctions/getJSONData'
 
 import {
   Collapse,
@@ -37,12 +38,36 @@ class HomePage extends Component {
     this.state = {
       isOpen: false,
       displayData: realTestData,
+      batteryArr: [4,4,4,4,4]
     };
   }
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  }
+  componentWillMount() {
+    getData()
+    .then((data)=> {
+      this.parseData(data)
+      
+    })
+  }
+  parseData(data) {
+    var batteryArr = []
+    var batteryIndex = 1;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].node_id === batteryIndex) {
+        batteryArr.push(data[i].battery)
+        batteryIndex++
+      }
+      if (batteryIndex === 6) break;
+    }
+    this.setState({
+      batteryArr: batteryArr
+    })
+    //parse data and set it to state
+    
   }
 
   render() {
@@ -62,12 +87,11 @@ class HomePage extends Component {
             </Nav>
           </Collapse>
         </Navbar>
-        {/* <Battery className = "Battery" />
-        <NavBar className = "Navigation"/> */}
         <Container>
           <Row>
             <Col>
-              <Battery />
+
+              <Battery data={this.state.batteryArr}/>
 
             </Col>
             <Col>

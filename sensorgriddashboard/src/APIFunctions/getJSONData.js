@@ -3,7 +3,7 @@ import 'whatwg-fetch'
 // this function makes a call to the /data api and returns the JSON object
 export default function () {
   return new Promise((resolve, reject) => {
-    fetch('http://54.152.62.254:9022/data')
+    fetch('https://sensorgridapi.knightlab.com/sensordata/')
       .then(function (response) {
         console.log(response)
         return response.json()
