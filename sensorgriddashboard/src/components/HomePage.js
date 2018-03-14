@@ -5,6 +5,8 @@ import Battery from './Battery'
 import MyGoogleMap from './MyGoogleMap'
 import TimeSeries from './TimeSeries'
 import Average from './Average'
+import TabContainer from './TabContainer'
+import SummaryBar from './SummaryBar'
 import realTestData from '../TestData/testData';
 
 import {
@@ -60,25 +62,16 @@ class HomePage extends Component {
             </Nav>
           </Collapse>
         </Navbar>
-        <Battery className = "Battery" />
-        <NavBar className = "Navigation"/>
+        {/* <Battery className = "Battery" />
+        <NavBar className = "Navigation"/> */}
         <Container>
           <Row>
-            <MyGoogleMap />
-          </Row>
-          <Row>
-            <h2>Gas</h2>
-          </Row>
-          <Row>
             <Col>
-              <Average />
+              <SummaryBar />
             </Col>
             <Col>
-              <Average />
+              <TabContainer />
             </Col>
-          </Row>
-          <Row>
-            <TimeSeries displayData={this.state.displayData}/>
           </Row>
         </Container>
       </div>
