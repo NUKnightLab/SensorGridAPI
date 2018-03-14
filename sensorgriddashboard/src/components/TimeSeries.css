@@ -1,23 +1,33 @@
 .tooltip-content {
-    background: white;
-    border: 1px solid black;
-    color: black;
-    padding: 10px;
-    z-index: 99;
-    min-width: 120px;
-   }
-  
-   .tooltip-content:before {
-    background: white;
-    content: '';
-    padding: 0px;
-    transform: rotate(45deg);
-    width: 15px;
-    height: 15px;
-    position: absolute;
-    z-index: 99;
-   }
-  
+  background: white;
+  border: 1px solid black;
+  color: black;
+  padding: 10px;
+  z-index: 99;
+  min-width: 120px;
+ }
+
+ .tooltip-content:before {
+  content: '';
+  padding: 0px;
+  transform: rotate(45deg);
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  z-index: 99;
+ }
   .linegraph {
     width: 700px
   }
+.time-series-card {
+  width: 1060px;
+  height: 550px;
+  padding-bottom: 20px;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+.card-title {
+  margin-top: 10px;
+  margin-left: 10px;
+}
