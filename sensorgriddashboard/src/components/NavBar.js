@@ -39,14 +39,7 @@ class NavBar extends Component {
     return (
       <div>
         <div>
-          <ButtonGroup vertical id="navbar">
-            
-            <Button onClick={this.jumpToSection.bind(this, 1000)}>Particle</Button>
-            <Button onClick={this.jumpToSection.bind(this, 2000)}>Gas</Button>
-            <Button onClick={this.jumpToSection.bind(this, 3000)}>Temperature</Button>
-            <Button onClick={this.jumpToSection.bind(this, 4000)}>Humidity</Button>
-          </ButtonGroup>
-
+          
 
         </div>
       </div>

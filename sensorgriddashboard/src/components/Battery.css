@@ -9,3 +9,9 @@
     left: 2%;
 }
 
+#summary {
+    width: 400px;
+    position: relative;
+    left: 10px;
+}
+
