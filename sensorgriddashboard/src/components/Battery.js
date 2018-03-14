@@ -5,9 +5,12 @@ import {
     Button,
     ButtonGroup,
     ListGroup,
-    ListGroupItem
+    ListGroupItem,
+    Progress,
+    Table
 } from 'reactstrap';
-
+//import * as FontAwesome from 'react-icons/lib/fa'
+import { FaBattery4, FaBattery2, FaBattery1, FaSignal, FaCheckCircle, FaExclamationCircle } from 'react-icons/lib/fa';
 class Battery extends Component {
     constructor(props) {
         super(props);
@@ -17,13 +20,13 @@ class Battery extends Component {
         }
     }
 
-    getColor(reading) {
+    getBattery(reading) {
         if (reading < 3.8) {
-            return "#f77d7b";
+            return <FaBattery1 size="40px" color="red" />;
         } else if (reading >= 3.8 && reading < 4.0) {
-            return "yellow";
+            return <FaBattery2 size="40px" />;
         } else {
-            return "#91f7b0";
+            return <FaBattery4 size="40px" color="green" />;
         }
     }
 
@@ -32,29 +35,45 @@ class Battery extends Component {
 
 
     render() {
-        var styles = {
-            node1: {
-                color: this.getColor(this.state.data[0])
-            },
-            node2: {
-                color: this.getColor(this.state.data[1])
-            },
-            node3: {
-                color: this.getColor(this.state.data[2])
-            },
-            text: {
-                color: "white"
-            }
-        }
+        
         return (
             <div>
-                <ButtonGroup vertical id="NodeBattery">
-                    <Button ><p style={styles.text}>Node 1: <p style={styles.node1}>{this.state.data[0]}</p></p></Button>
-                    <Button ><p style={styles.text}>Node 2: <p style={styles.node2}>{this.state.data[1]}</p></p></Button>
-                    <Button><p style={styles.text}>Node 3: <p style={styles.node3}>{this.state.data[2]}</p></p></Button>
-                </ButtonGroup>
-                
-      </div>
+                <Table hover id = "summary">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Battery</th>
+                            <th>Network</th>
+                            <th>Reading</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>{this.getBattery(this.state.data[0])}</td>
+                            <td><FaSignal size="30px" /></td>
+                            <td><FaExclamationCircle size = "35px" color="red" /></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>{this.getBattery(this.state.data[1])}</td>
+                            <td><FaSignal size="30px" /></td>
+                            <td><FaCheckCircle size = "35px"/></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>{this.getBattery(this.state.data[2])}</td>
+                            <td><FaSignal size="30px" color = "red"/></td>
+                            <td><FaCheckCircle size = "35px"/></td>
+                        </tr>
+                    </tbody>
+                </Table>
+
+
+                <div>
+
+                </div>
+            </div>
         )
     }
 }
