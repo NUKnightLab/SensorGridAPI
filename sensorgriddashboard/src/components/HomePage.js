@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './HomePage.css'
 import NavBar from './NavBar'
 import Battery from './Battery'
-import MyGoogleMap from './MyGoogleMap'
+import Map from './Map'
 import TimeSeries from './TimeSeries'
 import Average from './Average'
 import TabContainer from './TabContainer'
@@ -81,7 +81,7 @@ class HomePage extends Component {
       },
       {
         id: '4',
-        color: 'yellow',
+        color: 'purple',
         data: []
       },
       {
@@ -108,7 +108,7 @@ class HomePage extends Component {
       },
       {
         id: '4',
-        color: 'yellow',
+        color: 'purple',
         data: []
       },
       {
@@ -157,14 +157,14 @@ class HomePage extends Component {
 
   render() {
     return (
-      <div>
+      <div class = "screen">
         <Navbar color="black" light expand="md">
           <NavbarBrand href="/">SensorGrid Dashboard</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/components/">Components</NavLink>
+                <NavLink href="https://sensorgridapi.knightlab.com/sensordata">API</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="https://github.com/NUKnightLab/SensorGridAPI">Github</NavLink>
@@ -174,13 +174,26 @@ class HomePage extends Component {
         </Navbar>
         <Container>
           <Row>
-            <Col>
+            <Col >
               <Battery data={this.state.batteryArr} />
             </Col>
-            <Col>
+            <Col >
               <TabContainer data={this.state}/>
             </Col>
           </Row>
+          {/* <Row>
+            <Col >
+              <Battery data={this.state.batteryArr} />
+            </Col>
+            <Col >
+              <Map />
+            </Col>
+          </Row>
+          <Row>
+            <Col >
+              <TabContainer data={this.state}/>
+            </Col>
+          </Row> */}
         </Container>
       </div>
     )

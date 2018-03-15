@@ -9,7 +9,7 @@
 
  .tooltip-content:before {
   content: '';
-  padding: 0px;
+  padding: 10px;
   transform: rotate(45deg);
   width: 15px;
   height: 15px;
@@ -20,11 +20,12 @@
     width: 700px
   }
 .time-series-card {
-  width: 1060px;
-  height: 550px;
+  width: 660px;
+  height: 350px;
   padding-bottom: 20px;
-  margin-left: 15px;
+  margin-left: 0px;
   margin-top: 15px;
+  border: 0px !important;
 }
 
 .card-title {

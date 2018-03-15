@@ -4,7 +4,7 @@ import { XYFrame, OrdinalFrame } from "semiotic"
 import './TimeSeries.css';
 import moment from 'moment';
 import { Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button } from 'reactstrap';
+  CardTitle, CardSubtitle, Button, Container } from 'reactstrap';
 
 
 
@@ -20,8 +20,9 @@ render() {
             <Card className='time-series-card'>
               <CardTitle className='card-title'>Sensor Grid Time Series Data</CardTitle>
               <CardSubtitle className='card-title'>Data 1 Measurements</CardSubtitle>
+
                 <XYFrame
-                  size={[1050, 500]}
+                  size={[600, 300]}
                   lines={this.props.displayData}
                   lineDataAccessor={"data"}
                   lineStyle={d => ({ fill: d.color, fillOpacity: 0.5, stroke: d.color, strokeWidth: '3px' })}
@@ -44,7 +45,8 @@ render() {
                       <p>Date: {d.created_at.toString()}</p>
                    </div>}
                   />
-              </Card>
+
+            </Card>
 
           );
    }

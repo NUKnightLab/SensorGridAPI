@@ -4,8 +4,9 @@ import {
 } from 'reactstrap';
 import classnames from 'classnames';
 import TimeSeries from './TimeSeries';
-import MyGoogleMap from './MyGoogleMap';
+import Map from './Map';
 import realTestData from '../TestData/testData';
+import './TimeSeries.css';
 
 class TabContainer extends Component {
   constructor(props) {
@@ -48,6 +49,12 @@ class TabContainer extends Component {
               </NavLink>
             </NavItem>
             <NavItem>
+              <NavLink
+                className={classnames({ active: this.state.activeTab === '3' })}
+                onClick={() => { this.toggle('3'); }}
+                >
+                  Location
+              </NavLink>
             </NavItem>
           </Nav>
           <TabContent activeTab={this.state.activeTab}>
@@ -55,7 +62,10 @@ class TabContainer extends Component {
               <TimeSeries type="gasSensor" displayData={this.props.data.particleData} />
             </TabPane>
             <TabPane tabId="2">
-              <MyGoogleMap />
+              <TimeSeries type="gasSensor" displayData={this.props.data.particleData} />
+            </TabPane>
+            <TabPane tabId="3">
+              <Map />
             </TabPane>
           </TabContent>
         </Card>
