@@ -15,7 +15,7 @@ class TimeSeries extends Component {
    }
 
 render() {
-
+  // console.log('displayData', this.props.displayData)
       return (
             <Card className='time-series-card'>
               <CardTitle className='card-title'>Sensor Grid Time Series Data</CardTitle>
@@ -26,18 +26,21 @@ render() {
                   lineDataAccessor={"data"}
                   lineStyle={d => ({ fill: d.color, fillOpacity: 0.5, stroke: d.color, strokeWidth: '3px' })}
                   xAccessor="created_at"
-                  yAccessor="gasSensor"
+                  yAccessor={this.props.type}
                   xScaleType={scaleTime()}
                   lineIDAccessor="id"
                   margin={{ "top": 15, "bottom": 65, "left": 50, "right": 25 }}
                   hoverAnnotation={true}
                   axes={[
-                    { orient: 'left', tickFormat: d => d },
-                    { ticks: 5, orient: 'bottom', tickFormat: d => {return moment(d).format("MM/DD")}}
+                    { orient: 'left', tickFormat: d => {
+                    return d },
+                    ticks:10
+                    },
+                    { ticks: 5, orient: 'bottom', tickFormat: d => {return moment(d).format("MMM Do, h:mm:ss")}}
                   ]}
                   tooltipContent={d =>
                     <div className="tooltip-content" >
-                      <p>Data Reading: {d.gasSensor}</p>
+                      <p>Data Reading: {d[this.props.type]}</p>
                       <p>Date: {d.created_at.toString()}</p>
                    </div>}
                   />

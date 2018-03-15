@@ -48,23 +48,14 @@ class TabContainer extends Component {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink
-                className={classnames({ active: this.state.activeTab === '3' })}
-                onClick={() => { this.toggle('3'); }}
-                >
-                  Location
-              </NavLink>
             </NavItem>
           </Nav>
           <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="1">
-              <TimeSeries displayData={this.state.displayData} />
+              <TimeSeries type="gasSensor" displayData={this.props.data.particleData} />
             </TabPane>
             <TabPane tabId="2">
               <MyGoogleMap />
-            </TabPane>
-            <TabPane tabId="3">
-              <TimeSeries displayData={this.state.displayData} />
             </TabPane>
           </TabContent>
         </Card>

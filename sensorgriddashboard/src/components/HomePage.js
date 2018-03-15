@@ -38,7 +38,7 @@ class HomePage extends Component {
     this.state = {
       isOpen: false,
       displayData: realTestData,
-      batteryArr: [4,4,4,4,4]
+      batteryArr: [4, 4, 4, 4, 4]
     };
   }
   toggle() {
@@ -48,10 +48,10 @@ class HomePage extends Component {
   }
   componentWillMount() {
     getData()
-    .then((data)=> {
-      this.parseData(data)
-      
-    })
+      .then((data) => {
+        this.parseData(data)
+
+      })
   }
   parseData(data) {
     var batteryArr = []
@@ -63,12 +63,97 @@ class HomePage extends Component {
       }
       if (batteryIndex === 6) break;
     }
+    var particleData = [
+      {
+        id: '1',
+        color: 'blue',
+        data: []
+      },
+      {
+        id: '2',
+        color: 'green',
+        data: []
+      },
+      {
+        id: '3',
+        color: 'red',
+        data: []
+      },
+      {
+        id: '4',
+        color: 'yellow',
+        data: []
+      },
+      {
+        id: '5',
+        color: 'orange',
+        data: []
+      },
+    ]
+    var batteryData = [
+      {
+        id: '1',
+        color: 'blue',
+        data: []
+      },
+      {
+        id: '2',
+        color: 'green',
+        data: []
+      },
+      {
+        id: '3',
+        color: 'red',
+        data: []
+      },
+      {
+        id: '4',
+        color: 'yellow',
+        data: []
+      },
+      {
+        id: '5',
+        color: 'orange',
+        data: []
+      },
+    ]
+    var test_day = 1;
+
+    for (var j = 0; j < data.length; j++) {
+      var id = data[j].node_id
+      // var date = data[j].timestamp.split("T")[0].split("-")
+      // var time = data[j].timestamp.split("T")[1].split(":")
+      // var day = this.getRandomInt(12) + 1
+        if (particleData[id - 1].data.length < 20) {
+          particleData[id - 1].data.push({
+            gasSensor: data[j].data,
+            created_at: new Date(data[j].timestamp),
+
+          })
+        }
+        if (batteryData[id - 1].data.length < 200) {
+          batteryData[id - 1].data.push({
+            created_at: new Date(data[j].timestamp),
+            battery: data[i].battery
+
+          })
+        }
+        test_day++
+    }
+
     this.setState({
-      batteryArr: batteryArr
+      batteryArr: batteryArr,
+      particleData: particleData,
+      batteryData: batteryData
     })
-    //parse data and set it to state
-    
+
+
   }
+
+  getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+
 
   render() {
     return (
@@ -90,10 +175,10 @@ class HomePage extends Component {
         <Container>
           <Row>
             <Col>
-              <Battery data={this.state.batteryArr}/>
+              <Battery data={this.state.batteryArr} />
             </Col>
             <Col>
-              <TabContainer />
+              <TabContainer data={this.state}/>
             </Col>
           </Row>
         </Container>
