@@ -2,6 +2,15 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.postgres.fields import JSONField
+
+
+class Data(models.Model):
+    ver = models.IntegerField()
+    net = models.IntegerField()
+    node = models.IntegerField()
+    data = JSONField(default=dict)
+
 
 # template for sensor grid data
 class SensorData(models.Model):

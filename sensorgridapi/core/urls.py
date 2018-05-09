@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 from django.contrib import admin
-from sensordata.models import SensorData
+from sensordata.models import SensorData, Data
 from sensordata import views
 from sensordata.views import SensorDataList
 
@@ -39,6 +39,20 @@ class SensorDataSerializer(serializers.HyperlinkedModelSerializer):
         # exclude means include all fields
         exclude = []
 
+class DataSerializer(serializers.HyperlinkedModelSerializer):
+    #json = serializers.JSONField()
+
+    class Meta:
+        model = Data
+        # exclude means include all fields
+        exclude = []
+        #fields = ('json',)
+
+#class DataSerializer(serializers.BaseSerializer):
+#    class Meta:
+#        model = Data
+#        fields = ('json',)
+
 # shove the view into urls.py but it's the controller (handles request, returns response)
 # viewset = view.
 # response needs to be serialized. It's a json payload (serializer takes a model, converts to json)
@@ -49,12 +63,20 @@ class SensorDataViewSet(viewsets.ModelViewSet):
     queryset = SensorData.objects.all()
     serializer_class = SensorDataSerializer
 
+
+class DataViewSet(viewsets.ModelViewSet):
+    model = Data
+    queryset = Data.objects.all()
+    serializer_class = DataSerializer
+    #filter_fields = ['json']
+
 # Routers provide an easy way of automatically determining the URL configuration.
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 # for REST api, handles incoming requests. When it gets a sensordata request,
 # routers say which view to route it to
-router.register(r'data', SensorDataViewSet)
+#router.register(r'data', SensorDataViewSet)
+router.register(r'data', DataViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
