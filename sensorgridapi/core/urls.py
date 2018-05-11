@@ -20,6 +20,9 @@ from django.contrib import admin
 from sensordata.models import SensorData, Data
 from sensordata import views
 from sensordata.views import SensorDataList
+from rest_framework import status
+from rest_framework.response import Response
+
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -69,6 +72,13 @@ class DataViewSet(viewsets.ModelViewSet):
     queryset = Data.objects.all()
     serializer_class = DataSerializer
     #filter_fields = ['json']
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data, many=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 # Routers provide an easy way of automatically determining the URL configuration.
 router = routers.DefaultRouter()
