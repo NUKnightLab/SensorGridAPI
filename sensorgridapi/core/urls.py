@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib.auth.models import User
-from rest_framework import routers, serializers, viewsets
+from rest_framework_nested import routers
+from rest_framework import serializers, viewsets
 from django.contrib import admin
-from sensordata.models import SensorData, Data
+from sensordata.models import SensorData, Network, Data
 from sensordata import views
 from sensordata.views import SensorDataList
 from rest_framework import status
@@ -42,7 +43,16 @@ class SensorDataSerializer(serializers.HyperlinkedModelSerializer):
         # exclude means include all fields
         exclude = []
 
-class DataSerializer(serializers.HyperlinkedModelSerializer):
+
+class NetworkSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Network
+        # exclude means include all fields
+        exclude = []
+        #fields = ('json',)
+
+class DataSerializer(serializers.ModelSerializer):
     #json = serializers.JSONField()
 
     class Meta:
@@ -50,6 +60,7 @@ class DataSerializer(serializers.HyperlinkedModelSerializer):
         # exclude means include all fields
         exclude = []
         #fields = ('json',)
+
 
 #class DataSerializer(serializers.BaseSerializer):
 #    class Meta:
@@ -67,6 +78,11 @@ class SensorDataViewSet(viewsets.ModelViewSet):
     serializer_class = SensorDataSerializer
 
 
+class NetworkViewSet(viewsets.ModelViewSet):
+    model = Network
+    queryset = Network.objects.all()
+    serializer_class = NetworkSerializer
+
 class DataViewSet(viewsets.ModelViewSet):
     model = Data
     queryset = Data.objects.all()
@@ -74,7 +90,13 @@ class DataViewSet(viewsets.ModelViewSet):
     #filter_fields = ['json']
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data, many=True)
+        #print(args)
+        #print(kwargs)
+        data = request.data
+        for d in data:
+            d['network'] = kwargs['network_pk']
+        print(data)
+        serializer = self.get_serializer(data=data, many=True)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
@@ -88,12 +110,18 @@ router.register(r'users', UserViewSet)
 #router.register(r'data', SensorDataViewSet)
 router.register(r'data', DataViewSet)
 
+#router = routers.DefaultRouter()
+router.register(r'networks', NetworkViewSet)
+network_router = routers.NestedSimpleRouter(router, r'networks', lookup='network')
+network_router.register(r'data', DataViewSet, base_name='network-data')
+
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 # Create url extensions, and assign url frameworks to each extension
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(router.urls)),
+    url(r'^', include(network_router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # url(r'^', include('sensordata.urls')),
     url(r'^sensordata/$', views.sensordata_list),

@@ -5,7 +5,11 @@ from django.db import models
 from django.contrib.postgres.fields import JSONField
 
 
+class Network(models.Model):
+    id = models.IntegerField(primary_key=True)
+
 class Data(models.Model):
+    network = models.ForeignKey(Network, null=True)
     ver = models.IntegerField()
     net = models.IntegerField()
     node = models.IntegerField()
