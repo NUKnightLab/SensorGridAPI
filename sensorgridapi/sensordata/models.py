@@ -13,8 +13,6 @@ class Data(models.Model):
     received_at = models.DateTimeField(auto_now_add=True)
     network = models.ForeignKey(Network, null=True)
     node = models.IntegerField()
-    type = models.CharField(max_length=10)
-    data = JSONField(default=dict)
     hpm = ArrayField(models.IntegerField(), size=2, null=True)
     ts = models.IntegerField(null=True)
     bat = models.DecimalField(max_digits=3, decimal_places=2, null=True)
