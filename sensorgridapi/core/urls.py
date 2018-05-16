@@ -13,8 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+import datetime
 from django.conf.urls import url, include
 from django.contrib.auth.models import User
+from django.utils import timezone
 from rest_framework_nested import routers
 from rest_framework import serializers, viewsets
 from django.contrib import admin
@@ -91,6 +93,10 @@ class DataViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         q = Data.objects.all()
+        if 'hours' in self.request.GET:
+            t = timezone.now() - datetime.timedelta(
+                hours=int(self.request.GET['hours']))
+            q = q.filter(received_at__gte=t)
         type_ = self.request.GET.get('type')
         if type_ == 'bat':
             q = q.filter(bat__isnull=False)
