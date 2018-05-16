@@ -89,6 +89,15 @@ class DataViewSet(viewsets.ModelViewSet):
     serializer_class = DataSerializer
     #filter_fields = ['json']
 
+    def get_queryset(self):
+        q = Data.objects.all()
+        type_ = self.request.GET.get('type')
+        if type_ == 'bat':
+            q = q.filter(bat__isnull=False)
+        if type_ == 'hpm':
+            q = q.filter(hpm__isnull=False)
+        return q
+
     def create(self, request, *args, **kwargs):
         #print(args)
         #print(kwargs)
