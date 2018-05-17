@@ -59,10 +59,10 @@ class TabContainer extends Component {
           </Nav>
           <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="1">
-              <TimeSeries type="gasSensor" displayData={this.props.data.particleData} />
+              <TimeSeries type="gasSensor" displayData={this.props.data.displayData} />
             </TabPane>
             <TabPane tabId="2">
-              <TimeSeries type="gasSensor" displayData={this.props.data.particleData} />
+              <TimeSeries type="gasSensor" displayData={this.props.data.displayData} />
             </TabPane>
             <TabPane tabId="3">
               <Map />
