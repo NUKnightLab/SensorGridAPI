@@ -2,6 +2,24 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.postgres.fields import JSONField
+from django.contrib.postgres.fields import ArrayField
+
+
+class Network(models.Model):
+    id = models.IntegerField(primary_key=True)
+
+class Data(models.Model):
+    received_at = models.DateTimeField(auto_now_add=True)
+    network = models.ForeignKey(Network, null=True)
+    node = models.IntegerField()
+    hpm = ArrayField(models.IntegerField(), size=2, null=True)
+    ts = models.IntegerField(null=True)
+    bat = models.DecimalField(max_digits=3, decimal_places=2, null=True)
+
+    class Meta:
+        ordering = ('-received_at',)
+
 
 # template for sensor grid data
 class SensorData(models.Model):

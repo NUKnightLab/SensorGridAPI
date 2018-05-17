@@ -104,6 +104,20 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Database
+# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': env['DB_ENGINE__DEFAULT'],
+        'NAME': env['DB_NAME__DEFAULT'],
+        'USER': env['DB_USER__DEFAULT'],
+        'PASSWORD': env['DB_PASSWORD__DEFAULT'],
+        'HOST': env['DB_HOST__DEFAULT'],
+        'PORT': env['DB_PORT__DEFAULT']
+    }
+}
+
 # to be removed later -- sets up default permissions
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -111,5 +125,6 @@ REST_FRAMEWORK = {
     #'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'DEFAULT_PERMISSION_CLASSES': [
         # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
 }
