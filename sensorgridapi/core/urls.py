@@ -25,6 +25,7 @@ from sensordata import views
 from sensordata.views import SensorDataList
 from rest_framework import status
 from rest_framework.response import Response
+from sensordata.serializers import NodeSerializer
 
 
 # Serializers define the API representation.
@@ -46,10 +47,6 @@ class SensorDataSerializer(serializers.HyperlinkedModelSerializer):
         exclude = []
 
 
-class NodeSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Node
-        fields = ['network', 'node_id']
 
 
 class NetworkSerializer(serializers.HyperlinkedModelSerializer):
@@ -97,7 +94,9 @@ class NodeViewSet(viewsets.ModelViewSet):
     serializer_class = NodeSerializer
 
     def get_queryset(self):
+        #return Node.objects.all()
         return Node.objects.filter(network=self.kwargs['network_pk'])
+
 
 class DataViewSet(viewsets.ModelViewSet):
     model = Data
@@ -139,12 +138,13 @@ router.register(r'users', UserViewSet)
 # routers say which view to route it to
 #router.register(r'data', SensorDataViewSet)
 router.register(r'data', DataViewSet)
+router.register(r'nodes', NodeViewSet, base_name='nodes')
 
 #router = routers.DefaultRouter()
 router.register(r'networks', NetworkViewSet)
 network_router = routers.NestedSimpleRouter(router, r'networks', lookup='network')
 network_router.register(r'data', DataViewSet, base_name='network-data')
-network_router.register(r'nodes', NodeViewSet, base_name='network-nodes')
+#network_router.register(r'nodes', NodeViewSet, base_name='network-nodes')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -157,4 +157,5 @@ urlpatterns = [
     # url(r'^', include('sensordata.urls')),
     url(r'^sensordata/$', views.sensordata_list),
     url('^sensordata/(?P<battery>.+)/$', SensorDataList.as_view()),
+    url('^networks/(?P<network_id>\d+)/nodes/(?P<node_id>\d+)/$', views.node)
 ]

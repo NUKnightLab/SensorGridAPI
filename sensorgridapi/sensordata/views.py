@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from sensordata.models import SensorData
+from sensordata.models import SensorData, Node
 from sensordata.serializers import *
 from sensordata.models import SensorData
 import datetime
@@ -176,3 +176,10 @@ def sensordata_detail(request, pk, format=None):
 
 class SensorDataList(generics.ListAPIView):
     serializer_class = SensorDataSerializer
+
+
+@api_view(['GET'])
+def node(request, network_id, node_id):
+    node = Node.objects.get(network_id=network_id, node_id=node_id)
+    serializer = NodeSerializer(node)
+    return Response(serializer.data)

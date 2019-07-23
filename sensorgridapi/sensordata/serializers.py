@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from sensordata.models import SensorData
+from sensordata.models import SensorData, Node
 
 # serialize all data fields 
 class SensorDataSerializer(serializers.ModelSerializer):
@@ -147,3 +147,8 @@ class SensorDataSerializer_longitude_node_id(serializers.ModelSerializer):
         model = SensorData
         fields = ('longitude','node_id',)
         exclude = []
+
+class NodeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Node
+        fields = ['network', 'node_id']
