@@ -20,7 +20,7 @@ from django.utils import timezone
 from rest_framework_nested import routers
 from rest_framework import serializers, viewsets
 from django.contrib import admin
-from sensordata.models import SensorData, Network, Data
+from sensordata.models import SensorData, Network, Data, Node
 from sensordata import views
 from sensordata.views import SensorDataList
 from rest_framework import status
@@ -46,13 +46,20 @@ class SensorDataSerializer(serializers.HyperlinkedModelSerializer):
         exclude = []
 
 
+class NodeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Node
+        fields = ['network', 'node_id']
+
+
 class NetworkSerializer(serializers.HyperlinkedModelSerializer):
+    nodes = NodeSerializer(many=True)
 
     class Meta:
         model = Network
         # exclude means include all fields
         exclude = []
-        #fields = ('json',)
+        # fields = ('json',)
 
 class DataSerializer(serializers.ModelSerializer):
     #json = serializers.JSONField()
@@ -84,6 +91,13 @@ class NetworkViewSet(viewsets.ModelViewSet):
     model = Network
     queryset = Network.objects.all()
     serializer_class = NetworkSerializer
+
+class NodeViewSet(viewsets.ModelViewSet):
+    model = Node
+    serializer_class = NodeSerializer
+
+    def get_queryset(self):
+        return Node.objects.filter(network=self.kwargs['network_pk'])
 
 class DataViewSet(viewsets.ModelViewSet):
     model = Data
@@ -130,6 +144,7 @@ router.register(r'data', DataViewSet)
 router.register(r'networks', NetworkViewSet)
 network_router = routers.NestedSimpleRouter(router, r'networks', lookup='network')
 network_router.register(r'data', DataViewSet, base_name='network-data')
+network_router.register(r'nodes', NodeViewSet, base_name='network-nodes')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

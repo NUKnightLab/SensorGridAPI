@@ -12,10 +12,14 @@ class Network(models.Model):
 
 class Node(models.Model):
     node_id = models.IntegerField()
-    network = models.ForeignKey('Network')
+    network = models.ForeignKey('Network', related_name='nodes')
 
     class Meta:
         unique_together = ('node_id', 'network')
+
+    def __str__(self):
+        return str(self.node_id)
+
 
 
 class Data(models.Model):
