@@ -108,8 +108,9 @@ class DataViewSet(viewsets.ModelViewSet):
         #print(args)
         #print(kwargs)
         data = request.data
+        return Response(data)
         for d in data:
-            d['network'] = kwargs['network_pk']
+            d['network'] = kwargs['network']
         print(data)
         serializer = self.get_serializer(data=data, many=True)
         serializer.is_valid(raise_exception=True)

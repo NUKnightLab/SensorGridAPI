@@ -9,6 +9,15 @@ from django.contrib.postgres.fields import ArrayField
 class Network(models.Model):
     id = models.IntegerField(primary_key=True)
 
+
+class Node(models.Model):
+    node_id = models.IntegerField()
+    network = models.ForeignKey('Network')
+
+    class Meta:
+        unique_together = ('node_id', 'network')
+
+
 class Data(models.Model):
     received_at = models.DateTimeField(auto_now_add=True)
     network = models.ForeignKey(Network, null=True)
