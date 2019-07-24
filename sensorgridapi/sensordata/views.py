@@ -177,9 +177,26 @@ def sensordata_detail(request, pk, format=None):
 class SensorDataList(generics.ListAPIView):
     serializer_class = SensorDataSerializer
 
+class NodeDataList(generics.ListAPIView):
+    serializer_class = NodeDataSerializer
+
 
 @api_view(['GET'])
 def node(request, network_id, node_id):
     node = Node.objects.get(network_id=network_id, node_id=node_id)
     serializer = NodeSerializer(node)
     return Response(serializer.data)
+
+@api_view(['GET', 'POST'])
+def node_data(request, network_id, node_id):
+    if request.method == 'GET':
+        data = NodeData.objects.filter(network_id=network_id, node_id=node_id)
+        return Response({ 'data': [ d.data for d in data ]})
+    elif request.method == 'POST':
+        if 'data' in request.data:
+            for d in request.data['data']:
+                NodeData(network_id=network_id, node_id=node_id, data=d).save()
+            return Response({ 'status': 'OK', 'action': 'created', 'count': len(request.data) })
+        else:
+            NodeData(network_id=network_id, node_id=node_id, data=request.data).save()
+            return Response({ 'status': 'OK', 'action': 'created', 'count': 1 })

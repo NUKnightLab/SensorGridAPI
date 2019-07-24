@@ -21,6 +21,12 @@ class Node(models.Model):
         return str(self.node_id)
 
 
+class NodeData(models.Model):
+    received_at = models.DateTimeField(auto_now_add=True)
+    network = models.ForeignKey(Network)
+    node = models.ForeignKey(Node)
+    data = JSONField()
+   
 
 class Data(models.Model):
     received_at = models.DateTimeField(auto_now_add=True)

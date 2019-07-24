@@ -138,7 +138,7 @@ router.register(r'users', UserViewSet)
 # routers say which view to route it to
 #router.register(r'data', SensorDataViewSet)
 router.register(r'data', DataViewSet)
-router.register(r'nodes', NodeViewSet, base_name='nodes')
+#router.register(r'nodes', NodeViewSet, base_name='nodes')
 
 #router = routers.DefaultRouter()
 router.register(r'networks', NetworkViewSet)
@@ -157,5 +157,6 @@ urlpatterns = [
     # url(r'^', include('sensordata.urls')),
     url(r'^sensordata/$', views.sensordata_list),
     url('^sensordata/(?P<battery>.+)/$', SensorDataList.as_view()),
+    url('^networks/(?P<network_id>\d+)/nodes/(?P<node_id>\d+)/data/$', views.node_data),
     url('^networks/(?P<network_id>\d+)/nodes/(?P<node_id>\d+)/$', views.node)
 ]

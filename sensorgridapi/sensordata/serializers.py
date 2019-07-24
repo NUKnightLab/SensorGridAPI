@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from sensordata.models import SensorData, Node
+from sensordata.models import SensorData, Node, NodeData
 
 # serialize all data fields 
 class SensorDataSerializer(serializers.ModelSerializer):
@@ -152,3 +152,8 @@ class NodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Node
         fields = ['network', 'node_id']
+
+class NodeDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NodeData
+        fields = ['network_id', 'node_id', 'data']
