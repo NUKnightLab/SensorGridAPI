@@ -200,3 +200,14 @@ def node_data(request, network_id, node_id):
         else:
             NodeData(network_id=network_id, node_id=node_id, data=request.data).save()
             return Response({ 'status': 'OK', 'action': 'created', 'count': 1 })
+
+
+@api_view(['GET'])
+def network_routes(request, network_id):
+    return Response({
+        2: { 1, 2 },
+        3: { 1, 2, 3 },
+        4: { 1, 2, 3, 6, 5, 4 },
+        5: { 1, 3, 6, 5 },
+        6: { 1, 2, 3, 6 }
+    })
