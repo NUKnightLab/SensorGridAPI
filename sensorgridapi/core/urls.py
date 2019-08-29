@@ -155,6 +155,7 @@ urlpatterns = [
     url(r'^', include(network_router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # url(r'^', include('sensordata.urls')),
+    url(r'^timestamp/?$', views.current_timestamp),
     url(r'^sensordata/$', views.sensordata_list),
     url('^sensordata/(?P<battery>.+)/$', SensorDataList.as_view()),
     url('^networks/(?P<network_id>\d+)/routes/$', views.network_routes),

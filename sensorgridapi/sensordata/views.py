@@ -6,6 +6,7 @@ from sensordata.models import SensorData, Node
 from sensordata.serializers import *
 from sensordata.models import SensorData
 import datetime
+import time
 
 @api_view(['GET', 'POST'])
 def sensordata_list(request, format=None):
@@ -207,7 +208,12 @@ def network_routes(request, network_id):
     return Response({
         2: { 1, 2 },
         3: { 1, 2, 3 },
-        4: { 1, 2, 3, 6, 5, 4 },
+        4: { 1, 2, 3, 4 },
         5: { 1, 3, 6, 5 },
         6: { 1, 2, 3, 6 }
     })
+
+
+@api_view(['GET'])
+def current_timestamp(request):
+    return Response(round(time.time()))
