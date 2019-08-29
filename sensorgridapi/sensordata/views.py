@@ -216,4 +216,5 @@ def network_routes(request, network_id):
 
 @api_view(['GET'])
 def current_timestamp(request):
+    """ Not really used since the wifi101 module uses NTP. """
     return Response(round(time.time()))
