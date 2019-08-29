@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import datetime
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 from django.contrib.postgres.fields import ArrayField
@@ -26,6 +27,11 @@ class NodeData(models.Model):
     network = models.ForeignKey(Network)
     node = models.ForeignKey(Node)
     data = JSONField()
+
+    def rendered(self):
+        data = self.data
+        data['dt'] = datetime.datetime.fromtimestamp(data.get('ts', 0)).strftime('%Y-%m-%d %H:%M:%S')
+        return data
    
 
 class Data(models.Model):

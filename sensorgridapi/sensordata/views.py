@@ -188,11 +188,12 @@ def node(request, network_id, node_id):
     serializer = NodeSerializer(node)
     return Response(serializer.data)
 
+
 @api_view(['GET', 'POST'])
 def node_data(request, network_id, node_id):
     if request.method == 'GET':
         data = NodeData.objects.filter(network_id=network_id, node_id=node_id)
-        return Response({ 'data': [ d.data for d in data ]})
+        return Response({ 'data': [ d.rendered() for d in data ]})
     elif request.method == 'POST':
         if 'data' in request.data:
             for d in request.data['data']:
