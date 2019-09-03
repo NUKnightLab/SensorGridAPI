@@ -205,14 +205,17 @@ def node_data(request, network_id, node_id):
 
 
 @api_view(['GET'])
-def network_routes(request, network_id):
+def network_nodes(request, network_id):
     return Response({
-        2: { 1, 2 },
-        3: { 1, 2, 3 },
-        4: { 1, 2, 3, 4 },
-        5: { 1, 3, 6, 5 },
-        6: { 1, 2, 3, 6 }
-    })
+        "network_id": int(network_id),
+        "collector_id": 1,
+        "nodes": [
+        { "node_id": 2, "route": { 1, 2 } },
+        { "node_id": 3, "route": { 1, 2, 3 } },
+        { "node_id": 4, "route": { 1, 2, 3, 4 } },
+        { "node_id": 5, "route": { 1, 3, 6, 5 } },
+        { "node_id": 6, "route": { 1, 2, 3, 6 } }
+    ]})
 
 
 @api_view(['GET'])

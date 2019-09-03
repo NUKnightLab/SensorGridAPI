@@ -158,7 +158,7 @@ urlpatterns = [
     url(r'^timestamp/?$', views.current_timestamp),
     url(r'^sensordata/$', views.sensordata_list),
     url('^sensordata/(?P<battery>.+)/$', SensorDataList.as_view()),
-    url('^networks/(?P<network_id>\d+)/routes/$', views.network_routes),
+    url('^networks/(?P<network_id>\d+)/nodes/?$', views.network_nodes),
     url('^networks/(?P<network_id>\d+)/nodes/(?P<node_id>\d+)/data/$', views.node_data),
     url('^networks/(?P<network_id>\d+)/nodes/(?P<node_id>\d+)/$', views.node)
 ]
