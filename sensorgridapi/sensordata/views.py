@@ -1,10 +1,11 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from sensordata.models import SensorData, Node
 from sensordata.serializers import *
-from sensordata.models import SensorData
+from sensordata.models import SensorData, Node, Network
 import datetime
 import time
 
@@ -191,16 +192,18 @@ def node(request, network_id, node_id):
 
 @api_view(['GET', 'POST'])
 def node_data(request, network_id, node_id):
+    network = get_object_or_404(Network, id=network_id)
+    node = get_object_or_404(Node, node_id=node_id, network=network)
     if request.method == 'GET':
-        data = NodeData.objects.filter(network_id=network_id, node_id=node_id)
+        data = NodeData.objects.filter(network=network, node=node)
         return Response({ 'data': [ d.rendered() for d in data ]})
     elif request.method == 'POST':
         if 'data' in request.data:
             for d in request.data['data']:
-                NodeData(network_id=network_id, node_id=node_id, data=d).save()
+                NodeData(network=network, node=node, data=d).save()
             return Response({ 'status': 'OK', 'action': 'created', 'count': len(request.data) })
         else:
-            NodeData(network_id=network_id, node_id=node_id, data=request.data).save()
+            NodeData(network=network, node=node, data=request.data).save()
             return Response({ 'status': 'OK', 'action': 'created', 'count': 1 })
 
 
@@ -213,8 +216,8 @@ def network_nodes(request, network_id):
         { "node_id": 2, "route": { 1, 2 } },
         { "node_id": 3, "route": { 1, 2, 3 } },
         { "node_id": 4, "route": { 1, 2, 3, 4 } },
-        { "node_id": 5, "route": { 1, 3, 6, 5 } },
-        { "node_id": 6, "route": { 1, 2, 3, 6 } }
+        { "node_id": 6, "route": { 1, 2, 3, 6 } },
+        { "node_id": 7, "route": { 1, 7 } },
     ]})
 
 
