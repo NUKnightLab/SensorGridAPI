@@ -213,11 +213,11 @@ def network_nodes(request, network_id):
         "network_id": int(network_id),
         "collector_id": 1,
         "nodes": [
-        { "node_id": 2, "route": { 1, 2 } },
-        { "node_id": 3, "route": { 1, 2, 3 } },
-        { "node_id": 4, "route": { 1, 2, 3, 4 } },
-        { "node_id": 6, "route": { 1, 2, 3, 6 } },
-        { "node_id": 7, "route": { 1, 7 } },
+        { "node_id": 183, "route": [ 1, 183 ] },
+        { "node_id": 3, "route": [ 1, 183, 3 ] },
+        { "node_id": 4, "route": [ 1, 183, 3, 4 ] },
+        { "node_id": 6, "route": [ 1, 183, 3, 6 ] },
+        { "node_id": 7, "route": [ 1, 7 ] },
     ]})
 
 
