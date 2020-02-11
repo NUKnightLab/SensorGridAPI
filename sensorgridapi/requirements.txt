@@ -1,4 +1,4 @@
-Django==1.11.9
+Django==1.11.28
 djangorestframework==3.7.7
 drf-nested-routers==0.90.2
 gunicorn==19.7.1
