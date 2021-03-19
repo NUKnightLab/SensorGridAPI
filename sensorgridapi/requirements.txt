@@ -1,5 +1,5 @@
 Django==1.11.9
-djangorestframework==3.7.7
+djangorestframework==3.11.2
 drf-nested-routers==0.90.2
 gunicorn==19.7.1
 psycopg2==2.7.3.2
