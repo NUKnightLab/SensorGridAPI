@@ -2,7 +2,7 @@
 To get the Django REST API set up:
 
 ```
-git clone https://github.com/NUKnightLab/SensorGridAPI.git
+git clone https://github.com/verdinjoshua26/SensorGridAPI.git
 cd SensorGridAPI
 ```
 If you have just installed the project, run:
