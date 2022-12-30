@@ -44,7 +44,7 @@
     "react-google-maps": "^9.4.5",
     "react-icons": "^2.2.7",
     "reactstrap": "^5.0.0-beta",
-    "semiotic": "^1.5.2",
+    "semiotic": "^1.20.6",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
